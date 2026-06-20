@@ -1,0 +1,197 @@
+{% extends 'core/base_admin.html' %}
+{% load static %}
+
+{% block title %}مدیریت ویترین آنلاین | تجلا گلد{% endblock %}
+
+<!-- عنوان داینامیک که در هدر تاپ‌بار رندر می‌شود -->
+{% block admin_page_title %}ویترین دیجیتال زیورآلات{% endblock %}
+
+{% block admin_content %}
+<div class="space-y-6 text-right">
+    
+    <!-- هدر بخش ویترین همراه با توضیح و دکمه اکشن سریع -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200/60 pb-4">
+        <div>
+            <h3 class="text-base font-black text-slate-800">کاتالوگ آنلاین محصولات طلا</h3>
+            <p class="text-[11px] text-slate-400 mt-0.5">افزودن، ویرایش، حذف و پایش وضعیت موجودی زیورآلات گالری</p>
+        </div>
+        <div class="flex gap-2.5">
+            <a href="#" class="inline-flex items-center justify-center gap-1.5 bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 font-black text-xs px-4 py-2.5 rounded-xl shadow-md shadow-amber-500/10 hover:opacity-95 transition-all">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+                </svg>
+                افزودن محصول جدید
+            </a>
+        </div>
+    </div>
+
+    <!-- کارت‌های آمار و اطلاعات ویترین کاتالوگ -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        
+        <!-- کارت تعداد کل محصولات -->
+        <div class="rounded-2xl border border-slate-200/80 bg-white p-5 flex items-center justify-between shadow-sm hover:shadow-md transition-all">
+            <div class="space-y-1">
+                <span class="text-xs text-slate-400 font-medium block">کل محصولات کاتالوگ</span>
+                <span class="text-slate-800 font-black text-2xl tracking-wide">۱۴۸ <span class="text-xs text-slate-400 font-normal">قلم کالا</span></span>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-amber-600 shadow-inner">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- کارت دسته‌بندی‌ها -->
+        <div class="rounded-2xl border border-slate-200/80 bg-white p-5 flex items-center justify-between shadow-sm hover:shadow-md transition-all">
+            <div class="space-y-1">
+                <span class="text-xs text-slate-400 font-medium block">دسته‌بندی‌های فعال</span>
+                <span class="text-slate-800 font-black text-2xl tracking-wide">۶ <span class="text-xs text-slate-400 font-normal">گروه</span></span>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-500 shadow-inner">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2-0 01-2-2V6z" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- کارت محصول پرفروش -->
+        <div class="rounded-2xl border border-emerald-100 bg-emerald-50/30 p-5 flex items-center justify-between shadow-sm hover:shadow-md transition-all">
+            <div class="space-y-1">
+                <span class="text-xs text-emerald-700/80 font-medium block">پرفروش‌ترین ماه اخیر</span>
+                <span class="text-emerald-600 font-bold text-base block mt-1">دستبند زنجیری البرز</span>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 shadow-inner">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- ابزار فیلتر و جستجوی کاتالوگ طلا -->
+    <div class="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
+        <form method="GET" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="sm:col-span-2">
+                <input type="text" placeholder="جستجوی نام طلا، کد محصول، سازنده..." class="w-full h-11 bg-slate-50 border border-slate-200 rounded-xl px-4 text-xs text-slate-800 focus:outline-none focus:border-amber-500 focus:bg-white transition-all text-right placeholder-slate-400 shadow-inner">
+            </div>
+            <div>
+                <select class="w-full h-11 bg-slate-50 border border-slate-200 rounded-xl px-3 text-xs text-slate-600 focus:outline-none focus:border-amber-500 focus:bg-white transition-all">
+                    <option value="">همه دسته‌بندی‌ها</option>
+                    <option value="ring">انگشتر</option>
+                    <option value="bracelet">دستبند</option>
+                    <option value="necklace">گردنبند و مدال</option>
+                    <option value="earrings">گوشواره</option>
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <!-- گرید کارت‌های محصولات ویترین -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- محصول ۱ -->
+        <div class="rounded-2xl border border-slate-200/80 bg-white overflow-hidden flex flex-col justify-between shadow-sm group hover:border-slate-300 hover:shadow-md transition-all">
+            <div class="p-4 space-y-3 relative">
+                <div class="w-full h-44 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center relative overflow-hidden shadow-inner">
+                    <svg class="w-12 h-12 text-slate-300 group-hover:text-amber-500/40 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span class="absolute top-2 right-2 bg-white/90 backdrop-blur-sm border border-slate-200 text-[10px] text-amber-700 px-2 py-0.5 rounded-md font-bold font-mono">TG-4021</span>
+                </div>
+                
+                <div>
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-bold text-slate-800 text-sm group-hover:text-amber-700 transition-colors">انگشتر طلا کارتیه پورتوفینو</h4>
+                        <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-medium">انگشتر</span>
+                    </div>
+                    <div class="flex items-center gap-4 mt-2 border-t border-slate-100 pt-2 text-xs">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-400 font-medium">وزن دقیق طلا</span>
+                            <span class="font-mono font-black text-slate-800 mt-0.5">۴.۸۲۰ <span class="text-[9px] font-normal text-slate-400">گرم</span></span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-400 font-medium">اجرت و کارمزد</span>
+                            <span class="font-mono font-bold text-amber-600 mt-0.5">۱۸٪</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-slate-50 border-t border-slate-100 p-3 grid grid-cols-2 gap-2">
+                <a href="#" class="bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100 text-center py-1.5 rounded-xl text-xs font-bold transition-all">ویرایش مشخصات</a>
+                <a href="#" class="bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white border border-rose-100 text-center py-1.5 rounded-xl text-xs font-bold transition-all">حذف از ویترین</a>
+            </div>
+        </div>
+
+        <!-- محصول ۲ -->
+        <div class="rounded-2xl border border-slate-200/80 bg-white overflow-hidden flex flex-col justify-between shadow-sm group hover:border-slate-300 hover:shadow-md transition-all">
+            <div class="p-4 space-y-3 relative">
+                <div class="w-full h-44 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center relative overflow-hidden shadow-inner">
+                    <svg class="w-12 h-12 text-slate-300 group-hover:text-amber-500/40 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span class="absolute top-2 right-2 bg-white/90 backdrop-blur-sm border border-slate-200 text-[10px] text-amber-700 px-2 py-0.5 rounded-md font-bold font-mono">TG-8832</span>
+                </div>
+                
+                <div>
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-bold text-slate-800 text-sm group-hover:text-amber-700 transition-colors">دستبند النگویی رولکس نئون</h4>
+                        <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-medium">دستبند</span>
+                    </div>
+                    <div class="flex items-center gap-4 mt-2 border-t border-slate-100 pt-2 text-xs">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-400 font-medium">وزن دقیق طلا</span>
+                            <span class="font-mono font-black text-slate-800 mt-0.5">۱۲.۳۵۰ <span class="text-[9px] font-normal text-slate-400">گرم</span></span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-400 font-medium">اجرت و کارمزد</span>
+                            <span class="font-mono font-bold text-amber-600 mt-0.5">۱۴٪</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-slate-50 border-t border-slate-100 p-3 grid grid-cols-2 gap-2">
+                <a href="#" class="bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100 text-center py-1.5 rounded-xl text-xs font-bold transition-all">ویرایش مشخصات</a>
+                <a href="#" class="bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white border border-rose-100 text-center py-1.5 rounded-xl text-xs font-bold transition-all">حذف از ویترین</a>
+            </div>
+        </div>
+
+        <!-- محصول ۳ -->
+        <div class="rounded-2xl border border-slate-200/80 bg-white overflow-hidden flex flex-col justify-between shadow-sm group hover:border-slate-300 hover:shadow-md transition-all">
+            <div class="p-4 space-y-3 relative">
+                <div class="w-full h-44 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center relative overflow-hidden shadow-inner">
+                    <svg class="w-12 h-12 text-slate-300 group-hover:text-amber-500/40 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span class="absolute top-2 right-2 bg-white/90 backdrop-blur-sm border border-slate-200 text-[10px] text-amber-700 px-2 py-0.5 rounded-md font-bold font-mono">TG-1092</span>
+                </div>
+                
+                <div>
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-bold text-slate-800 text-sm group-hover:text-amber-700 transition-colors">نیم ست طلا کلئوپاترا تراش</h4>
+                        <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-medium">سرویس و ست</span>
+                    </div>
+                    <div class="flex items-center gap-4 mt-2 border-t border-slate-100 pt-2 text-xs">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-400 font-medium">وزن دقیق طلا</span>
+                            <span class="font-mono font-black text-slate-800 mt-0.5">۲۴.۱۰۰ <span class="text-[9px] font-normal text-slate-400">گرم</span></span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-400 font-medium">اجرت و کارمزد</span>
+                            <span class="font-mono font-bold text-amber-600 mt-0.5">۲۲٪</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-slate-50 border-t border-slate-100 p-3 grid grid-cols-2 gap-2">
+                <a href="#" class="bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100 text-center py-1.5 rounded-xl text-xs font-bold transition-all">ویرایش مشخصات</a>
+                <a href="#" class="bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white border border-rose-100 text-center py-1.5 rounded-xl text-xs font-bold transition-all">حذف از ویترین</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

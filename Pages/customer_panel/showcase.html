@@ -1,0 +1,129 @@
+{% extends 'core/base_customer.html' %}
+{% load static %}
+
+{% block page_title %}کاتالوگ زیورآلات | تجلا گلد{% endblock %}
+
+{% block header_title %}ویترین زیورآلات و مسکوکات{% endblock %}
+
+{% block sidebar_active_label %}کاتالوگ زیورآلات{% endblock %}
+
+{% block page_main %}
+    <!-- نوار فیلتر و عنوان -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-primary-300/60 pb-4">
+        <div class="text-right">
+            <span class="text-xs text-primary-600 block mb-0.5">جدیدترین دسته‌بندی‌های موجود</span>
+            <h3 class="text-base font-bold text-primary-800">محصولات آماده تحویل و ساخت</h3>
+        </div>
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+            <button class="bg-primary-500 text-white text-xs font-bold px-4 py-2 rounded-xl whitespace-nowrap shadow-md">همه زیورآلات</button>
+            <button class="bg-primary-200/60 border border-primary-300 text-primary-700 hover:text-primary-900 text-xs px-4 py-2 rounded-xl whitespace-nowrap transition-colors">دستبند و انگشتر</button>
+            <button class="bg-primary-200/60 border border-primary-300 text-primary-700 hover:text-primary-900 text-xs px-4 py-2 rounded-xl whitespace-nowrap transition-colors">گردنبند و پلاک</button>
+            <button class="bg-primary-200/60 border border-primary-300 text-primary-700 hover:text-primary-900 text-xs px-4 py-2 rounded-xl whitespace-nowrap transition-colors">شمش و مسکوکات</button>
+        </div>
+    </div>
+
+    <!-- گرید کارت‌های محصولات -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        
+        <!-- کارت محصول ۱ -->
+        <a href="/product/1/" class="group rounded-3xl border border-primary-300 bg-gradient-to-b from-primary-100/90 to-primary-200/70 backdrop-blur-xl p-4 flex flex-col justify-between shadow-xl transition-all duration-300 hover:border-primary-400 hover:shadow-2xl hover:-translate-y-1">
+            <div class="relative w-full aspect-square rounded-2xl bg-primary-200/80 border border-primary-300/60 overflow-hidden mb-4">
+                <div class="absolute inset-0 bg-gradient-to-t from-primary-200 via-transparent to-transparent opacity-60 z-10"></div>
+                <img src="{% static 'images/gold-1.jpg' %}" alt="دستبند کارتیه" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=400&auto=format&fit=crop';">
+                <span class="absolute top-3 right-3 z-20 bg-emerald-100 text-emerald-700 border border-emerald-300 text-[10px] font-bold px-2.5 py-1 rounded-full">موجود در گالری</span>
+            </div>
+            <div class="space-y-3 text-right">
+                <div>
+                    <span class="text-[10px] text-primary-600 block mb-0.5">کد کالا: TJ-4012</span>
+                    <h4 class="text-sm font-bold text-primary-800 group-hover:text-primary-600 transition-colors">دستبند کارتیه کلاسیک لوکس</h4>
+                </div>
+                <div class="flex items-center justify-between bg-primary-200/40 border border-primary-300/40 rounded-xl p-2.5">
+                    <div class="text-right">
+                        <span class="text-[9px] text-primary-600 block">وزن تقریبی</span>
+                        <span class="text-sm font-black text-primary-800 tracking-wide">۸.۴۲۰</span> <span class="text-[10px] text-primary-600">گرم</span>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-[9px] text-primary-600 block">عیار استاندارد</span>
+                        <span class="text-xs font-bold text-primary-600">۱۸ عیار (۷۵۰)</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- کارت محصول ۲ -->
+        <a href="/product/2/" class="group rounded-3xl border border-primary-300 bg-gradient-to-b from-primary-100/90 to-primary-200/70 backdrop-blur-xl p-4 flex flex-col justify-between shadow-xl transition-all duration-300 hover:border-primary-400 hover:shadow-2xl hover:-translate-y-1">
+            <div class="relative w-full aspect-square rounded-2xl bg-primary-200/80 border border-primary-300/60 overflow-hidden mb-4">
+                <div class="absolute inset-0 bg-gradient-to-t from-primary-200 via-transparent to-transparent opacity-60 z-10"></div>
+                <img src="{% static 'images/gold-2.jpg' %}" alt="انگشتر ونکلیف" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=400&auto=format&fit=crop';">
+                <span class="absolute top-3 right-3 z-20 bg-emerald-100 text-emerald-700 border border-emerald-300 text-[10px] font-bold px-2.5 py-1 rounded-full">موجود در گالری</span>
+            </div>
+            <div class="space-y-3 text-right">
+                <div>
+                    <span class="text-[10px] text-primary-600 block mb-0.5">کد کالا: TJ-8819</span>
+                    <h4 class="text-sm font-bold text-primary-800 group-hover:text-primary-600 transition-colors">انگشتر ونکلیف صدف طبیعی</h4>
+                </div>
+                <div class="flex items-center justify-between bg-primary-200/40 border border-primary-300/40 rounded-xl p-2.5">
+                    <div class="text-right">
+                        <span class="text-[9px] text-primary-600 block">وزن تقریبی</span>
+                        <span class="text-sm font-black text-primary-800 tracking-wide">۳.۱۵۰</span> <span class="text-[10px] text-primary-600">گرم</span>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-[9px] text-primary-600 block">عیار استاندارد</span>
+                        <span class="text-xs font-bold text-primary-600">۱۸ عیار (۷۵۰)</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- کارت محصول ۳ -->
+        <a href="/product/3/" class="group rounded-3xl border border-primary-300 bg-gradient-to-b from-primary-100/90 to-primary-200/70 backdrop-blur-xl p-4 flex flex-col justify-between shadow-xl transition-all duration-300 hover:border-primary-400 hover:shadow-2xl hover:-translate-y-1">
+            <div class="relative w-full aspect-square rounded-2xl bg-primary-200/80 border border-primary-300/60 overflow-hidden mb-4">
+                <div class="absolute inset-0 bg-gradient-to-t from-primary-200 via-transparent to-transparent opacity-60 z-10"></div>
+                <img src="{% static 'images/gold-3.jpg' %}" alt="گردنبند البرز" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=400&auto=format&fit=crop';">
+                <span class="absolute top-3 right-3 z-20 bg-amber-100 text-amber-700 border border-amber-300 text-[10px] font-bold px-2.5 py-1 rounded-full">امکان سفارش ساخت</span>
+            </div>
+            <div class="space-y-3 text-right">
+                <div>
+                    <span class="text-[10px] text-primary-600 block mb-0.5">کد کالا: TJ-2031</span>
+                    <h4 class="text-sm font-bold text-primary-800 group-hover:text-primary-600 transition-colors">گردنبند مدال البرز تراش‌خورده</h4>
+                </div>
+                <div class="flex items-center justify-between bg-primary-200/40 border border-primary-300/40 rounded-xl p-2.5">
+                    <div class="text-right">
+                        <span class="text-[9px] text-primary-600 block">وزن تقریبی</span>
+                        <span class="text-sm font-black text-primary-800 tracking-wide">۱۲.۷۰۰</span> <span class="text-[10px] text-primary-600">گرم</span>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-[9px] text-primary-600 block">عیار استاندارد</span>
+                        <span class="text-xs font-bold text-primary-600">۱۸ عیار (۷۵۰)</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- کارت محصول ۴ -->
+        <a href="/product/4/" class="group rounded-3xl border border-primary-300 bg-gradient-to-b from-primary-100/90 to-primary-200/70 backdrop-blur-xl p-4 flex flex-col justify-between shadow-xl transition-all duration-300 hover:border-primary-400 hover:shadow-2xl hover:-translate-y-1">
+            <div class="relative w-full aspect-square rounded-2xl bg-primary-200/80 border border-primary-300/60 overflow-hidden mb-4">
+                <div class="absolute inset-0 bg-gradient-to-t from-primary-200 via-transparent to-transparent opacity-60 z-10"></div>
+                <img src="{% static 'images/gold-4.jpg' %}" alt="شمش طلا" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=400&auto=format&fit=crop';">
+                <span class="absolute top-3 right-3 z-20 bg-emerald-100 text-emerald-700 border border-emerald-300 text-[10px] font-bold px-2.5 py-1 rounded-full">موجود در گالری</span>
+            </div>
+            <div class="space-y-3 text-right">
+                <div>
+                    <span class="text-[10px] text-primary-600 block mb-0.5">کد کالا: TJ-0052</span>
+                    <h4 class="text-sm font-bold text-primary-800 group-hover:text-primary-600 transition-colors">شمش مینیاتوری ۱۰۰ سوت ونوس</h4>
+                </div>
+                <div class="flex items-center justify-between bg-primary-200/40 border border-primary-300/40 rounded-xl p-2.5">
+                    <div class="text-right">
+                        <span class="text-[9px] text-primary-600 block">وزن دقیق</span>
+                        <span class="text-sm font-black text-primary-800 tracking-wide">۰.۱۰۰</span> <span class="text-[10px] text-primary-600">گرم</span>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-[9px] text-primary-600 block">عیار استاندارد</span>
+                        <span class="text-xs font-bold text-primary-600">۲۴ عیار (۹۹۵)</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+    </div>
+{% endblock %}

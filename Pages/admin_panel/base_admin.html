@@ -1,0 +1,138 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}پنل مدیریت | تجلا گلد{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-primary-800 text-white relative overflow-hidden flex flex-col md:flex-row pb-24 md:pb-0 bg-primary-950">
+    
+    <div class="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-secondary-500/5 rounded-full blur-[160px] pointer-events-none"></div>
+    <div class="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-primary-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+
+    <aside class="hidden md:flex w-72 bg-primary-900/90 backdrop-blur-xl border-l border-surface-800/60 p-6 flex-col justify-between z-20 shrink-0 h-screen sticky top-0">
+        <div class="space-y-8">
+            <div class="flex items-center gap-3 border-b border-surface-800/80 pb-6">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-secondary-400 to-amber-600 flex items-center justify-center shadow-lg shadow-secondary-500/20">
+                    <svg class="w-6 h-6 text-primary-950" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                    </svg>
+                </div>
+                <div class="text-right">
+                    <span class="text-xl font-black text-secondary-500 tracking-tight block">تجلا گلد <span class="text-[10px] bg-secondary-500/10 text-secondary-400 px-1.5 py-0.5 rounded-md font-normal mr-1">Admin</span></span>
+                    <span class="text-[11px] text-surface-400 block -mt-0.5">میز کار تخصصی مدیریت</span>
+                </div>
+            </div>
+
+            <nav class="space-y-1.5">
+                {% block admin_nav %}
+                <a href="#" class="flex items-center gap-3 text-surface-300 hover:text-white hover:bg-primary-950/40 px-4 py-3 rounded-xl transition-all group">
+                    <svg class="w-5 h-5 text-surface-400 group-hover:text-secondary-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                    <span class="text-sm">داشبورد</span>
+                </a>
+
+                <a href="#" class="flex items-center gap-3 text-surface-300 hover:text-white hover:bg-primary-950/40 px-4 py-3 rounded-xl transition-all group">
+                    <svg class="w-5 h-5 text-surface-400 group-hover:text-secondary-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <span class="text-sm">مدیریت مشتریان</span>
+                </a>
+
+                <a href="#" class="flex items-center gap-3 text-surface-300 hover:text-white hover:bg-primary-950/40 px-4 py-3 rounded-xl transition-all group">
+                    <svg class="w-5 h-5 text-surface-400 group-hover:text-secondary-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span class="text-sm">مدیریت ویترین آنلاین</span>
+                </a>
+
+                <a href="#" class="flex items-center gap-3 text-surface-300 hover:text-white hover:bg-primary-950/40 px-4 py-3 rounded-xl transition-all group">
+                    <svg class="w-5 h-5 text-surface-400 group-hover:text-secondary-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    <span class="text-sm">تاریخچه واریزی‌ها و برداشت‌ها</span>
+                </a>
+                {% endblock %}
+            </nav>
+        </div>
+
+        <div class="border-t border-surface-800/80 pt-4 mt-6 flex items-center justify-between">
+            <div class="text-right">
+                <span class="text-sm font-bold block text-white">مدیریت گالری</span>
+                <span class="text-[10px] text-emerald-400 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+                    برخط و آماده به کار
+                </span>
+            </div>
+            <a href="#" class="text-rose-400 hover:text-rose-300 p-2 rounded-xl hover:bg-rose-500/10 transition-all" title="خروج از پنل">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+            </a>
+        </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col min-w-0 z-10">
+        
+        <header class="w-full border-b border-surface-800/60 bg-primary-900/80 backdrop-blur-md h-20 px-4 md:px-8 flex items-center justify-between shrink-0 sticky top-0 z-30">
+            <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2 md:hidden">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-secondary-400 to-amber-600 flex items-center justify-center">
+                        <span class="text-primary-950 text-xs font-black">A</span>
+                    </div>
+                    <span class="text-sm font-black text-secondary-500 tracking-tight">تجلا ادمین</span>
+                </div>
+                <div class="hidden md:block text-right">
+                    <h2 class="text-base font-bold text-white">{% block admin_page_title %}میز کار مدیریت{% endblock %}</h2>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-3">
+                <div class="bg-primary-950/80 border border-surface-800/80 rounded-2xl px-3 sm:px-4 py-1.5 flex items-center gap-2 shadow-inner">
+                    <div class="flex flex-col text-left">
+                        <span class="text-[9px] text-surface-400 font-medium">مبنای نرخ طلا (۱۸ عیار)</span>
+                        <div class="flex items-center gap-1">
+                            <span class="text-secondary-400 font-black text-xs sm:text-sm tracking-wide">۴,۲۵۰,۰۰۰</span>
+                            <span class="text-[9px] text-surface-500">ریال</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-1 p-4 md:p-8 space-y-6 overflow-y-auto">
+            {% block admin_content %}{% endblock %}
+        </main>
+    </div>
+
+    <div class="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-primary-950/90 backdrop-blur-lg border-t border-surface-800/80 p-3 shadow-2xl">
+        <div class="max-w-md mx-auto flex items-center justify-around">
+            <a href="#" class="flex flex-col items-center justify-center gap-1 px-2 py-1 rounded-xl text-surface-400 hover:text-white transition-all">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+                <span class="text-[9px]">داشبورد</span>
+            </a>
+            <a href="#" class="flex flex-col items-center justify-center gap-1 px-2 py-1 rounded-xl text-surface-400 hover:text-white transition-all">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <span class="text-[9px]">مشتریان</span>
+            </a>
+            <a href="#" class="flex flex-col items-center justify-center gap-1 px-2 py-1 rounded-xl text-surface-400 hover:text-white transition-all">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span class="text-[9px]">ویترین</span>
+            </a>
+            <a href="#" class="flex flex-col items-center justify-center gap-1 px-2 py-1 rounded-xl text-surface-400 hover:text-white transition-all">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                <span class="text-[9px]">تراکنش‌ها</span>
+            </a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

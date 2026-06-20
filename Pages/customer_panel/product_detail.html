@@ -1,0 +1,140 @@
+{% extends 'core/base_customer.html' %}
+{% load static %}
+
+{% block page_title %}جزئیات محصول | تجلا گلد{% endblock %}
+
+{% block header_title %}جزئیات محصول{% endblock %}
+
+{% block sidebar_active_label %}کاتالوگ زیورآلات{% endblock %}
+
+{% block page_main %}
+<div class="max-w-6xl mx-auto">
+    <!-- مسیر راهنما (Breadcrumb) -->
+    <nav class="flex items-center gap-2 text-xs text-primary-600 mb-4" aria-label="مسیر راهنما">
+        <a href="#" class="hover:text-primary-800 transition-colors">خانه</a>
+        <span>/</span>
+        <a href="#" class="hover:text-primary-800 transition-colors">کاتالوگ زیورآلات</a>
+        <span>/</span>
+        <span class="text-primary-800 font-bold">دستبند کارتیه کلاسیک لوکس</span>
+    </nav>
+
+    <!-- بخش اصلی: گالری + اطلاعات -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
+        
+        <!-- ===== ستون راست (گالری تصاویر) ===== -->
+        <div class="space-y-4">
+            <!-- تصویر اصلی با زوم -->
+            <div class="relative rounded-3xl border border-primary-300 bg-primary-200/40 overflow-hidden group">
+                <img src="{% static 'images/gold-1.jpg' %}" 
+                     alt="دستبند کارتیه کلاسیک لوکس" 
+                     class="w-full h-auto aspect-square object-cover transition-transform duration-700 group-hover:scale-110"
+                     onerror="this.src='https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=600&auto=format&fit=crop';">
+                <!-- برچسب وضعیت -->
+                <span class="absolute top-4 right-4 z-10 bg-emerald-100 text-emerald-700 border border-emerald-300 text-xs font-bold px-3 py-1.5 rounded-full shadow-md">
+                    موجود در گالری
+                </span>
+                <!-- آیکون بزرگ‌نمایی -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/10 pointer-events-none">
+                    <svg class="w-12 h-12 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m-3-3h6" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- تصاویر کوچک (Thumbnails) -->
+            <div class="grid grid-cols-4 gap-3">
+                <div class="rounded-2xl border border-primary-300 overflow-hidden cursor-pointer hover:border-primary-500 transition-colors">
+                    <img src="{% static 'images/gold-1.jpg' %}" alt="تصویر ۱" class="w-full aspect-square object-cover" onerror="this.src='https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=200&auto=format&fit=crop';">
+                </div>
+                <div class="rounded-2xl border border-primary-300 overflow-hidden cursor-pointer hover:border-primary-500 transition-colors">
+                    <img src="{% static 'images/gold-2.jpg' %}" alt="تصویر ۲" class="w-full aspect-square object-cover" onerror="this.src='https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=200&auto=format&fit=crop';">
+                </div>
+                <div class="rounded-2xl border border-primary-300 overflow-hidden cursor-pointer hover:border-primary-500 transition-colors">
+                    <img src="{% static 'images/gold-3.jpg' %}" alt="تصویر ۳" class="w-full aspect-square object-cover" onerror="this.src='https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=200&auto=format&fit=crop';">
+                </div>
+                <div class="rounded-2xl border border-primary-300 overflow-hidden cursor-pointer hover:border-primary-500 transition-colors relative">
+                    <img src="{% static 'images/gold-4.jpg' %}" alt="تصویر ۴" class="w-full aspect-square object-cover" onerror="this.src='https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=200&auto=format&fit=crop';">
+                    <div class="absolute inset-0 bg-primary-950/30 flex items-center justify-center text-white text-xs font-bold backdrop-blur-[2px]">
+                        +۳
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== ستون چپ (اطلاعات محصول) ===== -->
+        <div class="space-y-5">
+            <!-- هدر محصول -->
+            <div>
+                <div class="flex items-center gap-2 text-xs text-primary-600 mb-1">
+                    <span>کد کالا: TJ-4012</span>
+                    <span class="w-1 h-1 rounded-full bg-primary-400"></span>
+                    <span class="bg-primary-300/30 text-primary-700 px-2 py-0.5 rounded-full">دسته‌بندی: دستبند</span>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-bold text-primary-800 leading-tight">دستبند کارتیه کلاسیک لوکس</h1>
+            </div>
+
+            <!-- باکس کوچک وزن و عیار (جایگزین کارت بزرگ) -->
+            <div class="flex items-center gap-4 bg-primary-200/40 border border-primary-300/60 rounded-2xl px-4 py-2.5 inline-flex">
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m2.828-9.9a5 5 0 117.072 0l-.707.707M6.343 6.343l.707.707m9.9 9.9l.707-.707" />
+                    </svg>
+                    <span class="text-sm font-bold text-primary-800">۸.۴۲۰ <span class="text-xs font-normal text-primary-600">گرم</span></span>
+                </div>
+                <span class="w-px h-6 bg-primary-300/60"></span>
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="text-sm font-bold text-primary-800">۱۸ عیار (۷۵۰)</span>
+                </div>
+            </div>
+
+            <!-- قیمت و موجودی -->
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-primary-300/20 border border-primary-300/60 rounded-2xl p-4">
+                <div class="text-right">
+                    <span class="text-[10px] text-primary-600 block">قیمت طلا (بر اساس نرخ روز)</span>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-xl md:text-2xl font-black text-primary-800">۴,۲۵۰,۰۰۰</span>
+                        <span class="text-xs text-primary-600">ریال</span>
+                    </div>
+                    <span class="text-[10px] text-primary-500">هر گرم طلای ۱۸ عیار</span>
+                </div>
+                <div class="flex items-center gap-2 bg-emerald-100/80 border border-emerald-300 rounded-xl px-3 py-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-xs font-bold text-emerald-700">موجود</span>
+                </div>
+            </div>
+
+            <!-- توضیحات -->
+            <div class="bg-primary-200/30 border border-primary-300/40 rounded-2xl p-4">
+                <h3 class="text-sm font-bold text-primary-800 mb-2">توضیحات محصول</h3>
+                <p class="text-sm text-primary-700 leading-relaxed">
+                    این دستبند کلاسیک با الهام از طرح‌های کارتیه و با استفاده از طلای ۱۸ عیار با کیفیت بالا ساخته شده است. 
+                    تراش‌های الماس‌گونه و پرداخت نهایی با دقت بالا، جلوهای لوکس و ماندگار به این اثر هنری بخشیده است. 
+                    مناسب برای هدیه و استفاده روزمره.
+                </p>
+                <ul class="mt-3 space-y-1 text-xs text-primary-600 list-disc list-inside">
+                    <li>جنس: طلای ۱۸ عیار</li>
+                    <li>روکش: رادیوم سفید</li>
+                    <li>وزن دقیق: ۸.۴۲۰ گرم</li>
+                    <li>ساخت ایران با استاندارد جهانی</li>
+                </ul>
+            </div>
+
+            <!-- دکمه‌های اقدام (به‌روز شده) -->
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button class="flex-1 bg-primary-500 hover:bg-primary-600 text-white font-bold px-6 py-3 rounded-2xl transition-all shadow-lg shadow-primary-500/20 flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    درخواست خرید
+                </button>
+                <button class="flex-1 bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded-2xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    افزودن به هدف
+                </button>
+            </div>
+{% endblock %}
