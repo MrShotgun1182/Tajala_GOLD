@@ -1,0 +1,85 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}تجلا گلد | سامانه آنلاین تراکنش‌های طلا{% endblock %}
+
+{% block content %}
+<!-- کانتینر اصلی با استایل مینیمال، تمیز و سازمانی -->
+<div class="min-h-dvh bg-white text-slate-900 relative overflow-hidden flex flex-col justify-between p-6 sm:p-8 md:p-16 font-sans antialiased selection:bg-amber-100">
+
+    <!-- هاله‌های نوری بسیار ملایم سبز جنگلی و طلایی در پس‌زمینه برای هویت بصری لوکس تجلا -->
+    <div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-primary-900/5 rounded-full blur-[160px] pointer-events-none"></div>
+    <div class="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] bg-secondary-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+
+    <!-- خطوط شبکه‌ای ملایم هندسی پس‌زمینه برای القای حس مهندسی و نظم پلتفرم -->
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-50 pointer-events-none"></div>
+
+    <!-- هدر متمرکز در وسط -->
+    <header class="w-full max-w-7xl mx-auto flex items-center justify-center z-10 relative border-b border-slate-100 pb-6">
+        <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-slate-950 flex items-center justify-center shadow-sm">
+                <span class="text-secondary-400 text-xs font-black tracking-tighter">TG</span>
+            </div>
+            <span class="text-lg font-black text-slate-900 tracking-tight">TAJALA <span class="text-secondary-500 font-medium text-xs tracking-widest mr-1">GOLD</span></span>
+        </div>
+    </header>
+
+    <!-- بخش اصلی هیرو (دو ستونه در دسکتاپ - متن در راست، تصویر طلا در چپ) -->
+    <main class="w-full max-w-7xl mx-auto z-10 relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center my-auto py-12">
+        
+        <!-- ستون سمت راست: محتوای متنی و دکمه ورود -->
+        <div class="space-y-8 text-center lg:text-right flex flex-col items-center lg:items-start order-2 lg:order-1">
+
+            <!-- عنوان اصلی پلتفرم -->
+            <div class="space-y-4">
+                <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight sm:leading-none">
+                    زیرساخت مدرن مدیریت و <br class="hidden sm:inline">
+                    <span class="underline decoration-secondary-500 decoration-4 underline-offset-8">پایش آنلاین حساب‌های طلا</span>
+                </h1>
+                <p class="text-slate-400 text-xs sm:text-sm font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed pt-2">
+                    سامانه اختصاصی تجلا گلد جهت ثبت، شفاف‌سازی و پایش لحظه‌ای تراکنش‌های واریز و برداشت طلای مجهز به صندوق امانات دیجیتال و ارزش‌گذاری ریالی به‌روز.
+                </p>
+            </div>
+
+            <!-- دکمه ورود شاخص (CTA) -->
+            <div class="w-full sm:w-auto pt-2">
+                <a href="#" class="w-full sm:w-auto px-10 h-14 bg-slate-950 text-white font-black rounded-xl text-xs flex items-center justify-center gap-3 transition-all hover:bg-slate-900 shadow-xl shadow-slate-950/10 hover:shadow-slate-950/20 group active:scale-[0.99]">
+                    ورود به پنل کاربری تجلا
+                    <svg class="w-4 h-4 text-secondary-400 group-hover:translate-x-[-4px] transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- ستون سمت چپ: تصویر طلا با کادر مینی‌مال لوکس -->
+        <div class="flex items-center justify-center order-1 lg:order-2">
+            <div class="relative w-full max-w-md aspect-square p-4 flex items-center justify-center group">
+                <!-- المان هندسی و مینیمال پشتی تصویر برای ایجاد عمق -->
+                <div class="absolute inset-0 border border-slate-200 rounded-3xl scale-95 opacity-60 group-hover:scale-100 group-hover:border-secondary-300 transition-all duration-700"></div>
+                <div class="absolute inset-0 bg-slate-50/50 rounded-3xl -rotate-3 group-hover:rotate-0 transition-transform duration-750"></div>
+                
+                <!-- باکس اصلی تصویر همراه با ماسک ملایم و سایه سنگین آرتیستی -->
+                <div class="w-full h-full rounded-2xl overflow-hidden bg-gradient-to-tr from-slate-50 to-slate-100 border border-slate-200/60 shadow-2xl shadow-slate-200/80 flex items-center justify-center relative z-10">
+                    <img src="{% static 'images/gold_asset.png' %}" alt="Tajala Gold Asset" class="w-4/5 h-4/5 object-contain mix-blend-multiply drop-shadow-2xl filter brightness-105 contrast-105 transition-transform duration-700 group-hover:scale-105" />
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- فوتر مینی‌مال خطی پایین صفحه -->
+    <footer class="w-full max-w-7xl mx-auto border-t border-slate-100 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 z-10 relative">
+        <p class="text-slate-400 text-[10px] font-medium font-mono">
+            &copy; 2026 TAJALA GOLD. ARCHITECTURE STANDARDS.
+        </p>
+        <div class="flex items-center gap-4 text-[11px] text-slate-400 font-bold">
+            <span class="flex items-center gap-1">
+                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                SSL امن دوطرفه
+            </span>
+        </div>
+    </footer>
+
+</div>
+{% endblock %}

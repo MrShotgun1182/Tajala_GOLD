@@ -1,85 +1,208 @@
-{% extends 'core/base.html' %}
+{% extends 'core/base_admin.html' %}
 {% load static %}
 
-{% block title %}تجلا گلد | سامانه آنلاین تراکنش‌های طلا{% endblock %}
+{% block title %}داشبورد جامع مدیریت | تجلا گلد{% endblock %}
 
-{% block content %}
-<!-- کانتینر اصلی با استایل مینیمال، تمیز و سازمانی -->
-<div class="min-h-dvh bg-white text-slate-900 relative overflow-hidden flex flex-col justify-between p-6 sm:p-8 md:p-16 font-sans antialiased selection:bg-amber-100">
+{% block admin_page_title %}اتاق فرمان و پایش هوشمند پلتفرم{% endblock %}
 
-    <!-- هاله‌های نوری بسیار ملایم سبز جنگلی و طلایی در پس‌زمینه برای هویت بصری لوکس تجلا -->
-    <div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-primary-900/5 rounded-full blur-[160px] pointer-events-none"></div>
-    <div class="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] bg-secondary-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+{% block admin_nav %}
+<a href="#" class="flex items-center gap-3 bg-slate-900 text-white font-bold px-4 py-3 rounded-xl transition-all shadow-md shadow-slate-900/10">
+    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+    </svg>
+    <span class="text-sm">داشبورد</span>
+</a>
 
-    <!-- خطوط شبکه‌ای ملایم هندسی پس‌زمینه برای القای حس مهندسی و نظم پلتفرم -->
-    <div class="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-50 pointer-events-none"></div>
+<a href="#" class="flex items-center gap-3 text-slate-600 hover:text-slate-900 hover:bg-slate-100 px-4 py-3 rounded-xl transition-all group">
+    <svg class="w-5 h-5 text-slate-400 group-hover:text-slate-700 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+    </svg>
+    <span class="text-sm">مدیریت مشتریان</span>
+</a>
 
-    <!-- هدر متمرکز در وسط -->
-    <header class="w-full max-w-7xl mx-auto flex items-center justify-center z-10 relative border-b border-slate-100 pb-6">
-        <div class="flex items-center gap-2.5">
-            <div class="w-8 h-8 rounded-lg bg-slate-950 flex items-center justify-center shadow-sm">
-                <span class="text-secondary-400 text-xs font-black tracking-tighter">TG</span>
-            </div>
-            <span class="text-lg font-black text-slate-900 tracking-tight">TAJALA <span class="text-secondary-500 font-medium text-xs tracking-widest mr-1">GOLD</span></span>
+<a href="#" class="flex items-center gap-3 text-slate-600 hover:text-slate-900 hover:bg-slate-100 px-4 py-3 rounded-xl transition-all group">
+    <svg class="w-5 h-5 text-slate-400 group-hover:text-slate-700 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>
+    <span class="text-sm">مدیریت ویترین آنلاین</span>
+</a>
+
+<a href="#" class="flex items-center gap-3 text-slate-600 hover:text-slate-900 hover:bg-slate-100 px-4 py-3 rounded-xl transition-all group">
+    <svg class="w-5 h-5 text-slate-400 group-hover:text-slate-700 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+    </svg>
+    <span class="text-sm">تاریخچه واریزی‌ها و برداشت‌ها</span>
+</a>
+{% endblock %}
+
+{% block admin_content %}
+<div class="space-y-8 text-right bg-slate-50 min-h-screen p-1 animate-fadeIn">
+    
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-200 pb-5">
+        <div>
+            <h3 class="text-xl font-black text-slate-800">اتاق فرمان تجلا گلد</h3>
+            <span class="text-xs text-slate-500 block mt-1">پایش آنلاین تراز مالی، مخزن امانات و رفتار مشتریان</span>
         </div>
-    </header>
-
-    <!-- بخش اصلی هیرو (دو ستونه در دسکتاپ - متن در راست، تصویر طلا در چپ) -->
-    <main class="w-full max-w-7xl mx-auto z-10 relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center my-auto py-12">
         
-        <!-- ستون سمت راست: محتوای متنی و دکمه ورود -->
-        <div class="space-y-8 text-center lg:text-right flex flex-col items-center lg:items-start order-2 lg:order-1">
-
-            <!-- عنوان اصلی پلتفرم -->
-            <div class="space-y-4">
-                <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight sm:leading-none">
-                    زیرساخت مدرن مدیریت و <br class="hidden sm:inline">
-                    <span class="underline decoration-secondary-500 decoration-4 underline-offset-8">پایش آنلاین حساب‌های طلا</span>
-                </h1>
-                <p class="text-slate-400 text-xs sm:text-sm font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed pt-2">
-                    سامانه اختصاصی تجلا گلد جهت ثبت، شفاف‌سازی و پایش لحظه‌ای تراکنش‌های واریز و برداشت طلای مجهز به صندوق امانات دیجیتال و ارزش‌گذاری ریالی به‌روز.
-                </p>
-            </div>
-
-            <!-- دکمه ورود شاخص (CTA) -->
-            <div class="w-full sm:w-auto pt-2">
-                <a href="#" class="w-full sm:w-auto px-10 h-14 bg-slate-950 text-white font-black rounded-xl text-xs flex items-center justify-center gap-3 transition-all hover:bg-slate-900 shadow-xl shadow-slate-950/10 hover:shadow-slate-950/20 group active:scale-[0.99]">
-                    ورود به پنل کاربری تجلا
-                    <svg class="w-4 h-4 text-secondary-400 group-hover:translate-x-[-4px] transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                </a>
-            </div>
+        <div class="flex flex-wrap items-center gap-3">
+            <a href="#" class="inline-flex items-center justify-center gap-2 bg-white border border-slate-200 text-slate-700 font-bold text-xs px-4 py-3 rounded-xl hover:bg-slate-50 transition-all shadow-sm">
+                <svg class="w-4 h-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                ماشین‌حساب تخصصی طلا
+            </a>
+            
+            <a href="#" class="inline-flex items-center justify-center gap-2 bg-amber-500 text-slate-950 font-black text-xs px-4 py-3 rounded-xl shadow-md shadow-amber-500/10 hover:bg-amber-600 transition-all">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+                </svg>
+                ثبت تراکنش جدید
+            </a>
         </div>
+    </div>
 
-        <!-- ستون سمت چپ: تصویر طلا با کادر مینی‌مال لوکس -->
-        <div class="flex items-center justify-center order-1 lg:order-2">
-            <div class="relative w-full max-w-md aspect-square p-4 flex items-center justify-center group">
-                <!-- المان هندسی و مینیمال پشتی تصویر برای ایجاد عمق -->
-                <div class="absolute inset-0 border border-slate-200 rounded-3xl scale-95 opacity-60 group-hover:scale-100 group-hover:border-secondary-300 transition-all duration-700"></div>
-                <div class="absolute inset-0 bg-slate-50/50 rounded-3xl -rotate-3 group-hover:rotate-0 transition-transform duration-750"></div>
-                
-                <!-- باکس اصلی تصویر همراه با ماسک ملایم و سایه سنگین آرتیستی -->
-                <div class="w-full h-full rounded-2xl overflow-hidden bg-gradient-to-tr from-slate-50 to-slate-100 border border-slate-200/60 shadow-2xl shadow-slate-200/80 flex items-center justify-center relative z-10">
-                    <img src="{% static 'images/gold_asset.png' %}" alt="Tajala Gold Asset" class="w-4/5 h-4/5 object-contain mix-blend-multiply drop-shadow-2xl filter brightness-105 contrast-105 transition-transform duration-700 group-hover:scale-105" />
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 flex items-center justify-between shadow-sm hover:shadow-md transition-shadow">
+            <div class="space-y-2">
+                <span class="text-xs text-slate-500 block font-medium">کل طلای امانتی کاربران</span>
+                <div class="flex items-baseline gap-1.5">
+                    <span class="text-amber-600 font-black text-3xl tracking-wide">۱,۴۸۲.۳۵۰</span>
+                    <span class="text-xs text-slate-400 font-medium">گرم</span>
                 </div>
             </div>
+            <div class="w-14 h-14 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 shadow-sm">
+                <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                </svg>
+            </div>
         </div>
 
-    </main>
-
-    <!-- فوتر مینی‌مال خطی پایین صفحه -->
-    <footer class="w-full max-w-7xl mx-auto border-t border-slate-100 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 z-10 relative">
-        <p class="text-slate-400 text-[10px] font-medium font-mono">
-            &copy; 2026 TAJALA GOLD. ARCHITECTURE STANDARDS.
-        </p>
-        <div class="flex items-center gap-4 text-[11px] text-slate-400 font-bold">
-            <span class="flex items-center gap-1">
-                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
-                SSL امن دوطرفه
-            </span>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 flex items-center justify-between shadow-sm hover:shadow-md transition-shadow">
+            <div class="space-y-2">
+                <span class="text-xs text-slate-500 block font-medium">ارزش ریالی کل طلاهای امانتی</span>
+                <div class="flex items-baseline gap-1.5">
+                    <span class="text-emerald-600 font-black text-2xl tracking-wide">۶,۲۹۹,۹۸۷</span>
+                    <span class="text-xs text-slate-400 font-medium">میلیون ریال</span>
+                </div>
+            </div>
+            <div class="w-14 h-14 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 shadow-sm">
+                <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
         </div>
-    </footer>
+
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 flex items-center justify-between shadow-sm hover:shadow-md transition-shadow sm:col-span-2 lg:col-span-1">
+            <div class="space-y-2">
+                <span class="text-xs text-slate-500 block font-medium">کل مشتریان پلتفرم</span>
+                <div class="flex items-baseline gap-1.5">
+                    <span class="text-slate-800 font-black text-3xl tracking-wide">۱,۲۴۰</span>
+                    <span class="text-xs text-slate-400 font-medium">نفر احراز شده</span>
+                </div>
+            </div>
+            <div class="w-14 h-14 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 shadow-sm">
+                <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 md:p-6 shadow-sm flex flex-col justify-between">
+            <div class="mb-5">
+                <h4 class="text-sm font-bold text-slate-800">تراز جریان مخزن طلا (ماهیانه)</h4>
+                <p class="text-[11px] text-slate-400 mt-0.5">مقایسه خطی حجم طلاهای سپرده شده در برابر طلاهای خارج شده (گرم)</p>
+            </div>
+            <div class="h-64 relative w-full">
+                <canvas id="goldFlowChart"></canvas>
+            </div>
+        </div>
+
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 md:p-6 shadow-sm flex flex-col justify-between">
+            <div class="mb-5">
+                <h4 class="text-sm font-bold text-slate-800">تراز جریان مخزن ریالی (ماهانه)</h4>
+                <p class="text-[11px] text-slate-400 mt-0.5">مقایسه خطی حجم طلاهای سپرده شده در برابر طلاهای خارج شده (ریالی)</p>
+            </div>
+            <div class="h-64 relative w-full">
+                <canvas id="activeCustomersChart"></canvas>
+            </div>
+        </div>
+    </div>
 
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    Chart.defaults.font.family = 'vazir, sans-serif';
+    Chart.defaults.color = '#64748b'; // رنگ متون چارت منطبق با Slate-500 برای خوانایی در تم روشن
+
+    // ۱. کانفیگ نمودار مقایسه‌ای تراز مخزن طلا
+    const ctxFlow = document.getElementById('goldFlowChart').getContext('2d');
+    new Chart(ctxFlow, {
+        type: 'line',
+        data: {
+            labels: ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه'],
+            datasets: [
+                {
+                    label: 'حجم واریز (گرم)',
+                    data: [45.2, 68.1, 32.4, 85.9, 54.0, 92.7, 15.1],
+                    borderColor: '#d97706', // زرد طلایی تیره تر برای وضوح بیشتر در صفحه سفید
+                    backgroundColor: 'transparent',
+                    borderWidth: 3,
+                    tension: 0.3,
+                    pointBackgroundColor: '#d97706'
+                },
+                {
+                    label: 'حجم برداشت (گرم)',
+                    data: [20.4, 15.0, 45.2, 30.1, 12.8, 60.5, 8.0],
+                    borderColor: '#e11d48', // رز پررنگ برای پس‌زمینه سفید
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    pointBackgroundColor: '#e11d48'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: true, labels: { boxWidth: 12, font: { size: 10 } } } },
+            scales: {
+                y: { grid: { color: '#f1f5f9' }, position: 'right' }, // خطوط شبکه کم‌رنگ متناسب با ساختار جدید
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // ۲. کانفیگ نمودار تعداد مشتریان فعال
+    const ctxCustomers = document.getElementById('activeCustomersChart').getContext('2d');
+    new Chart(ctxCustomers, {
+        type: 'bar',
+        data: {
+            labels: ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه'],
+            datasets: [{
+                label: 'تعداد مشتریان',
+                data: [12, 19, 8, 24, 15, 28, 4],
+                backgroundColor: 'rgba(13, 148, 136, 0.6)', // رنگ کله‌غازی ملایم روشن
+                hoverBackgroundColor: '#0d9488',
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { grid: { color: '#f1f5f9' }, position: 'right' },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+</script>
 {% endblock %}
