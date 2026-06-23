@@ -1,0 +1,27 @@
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from transactions import services
+
+@login_required
+def AdminTransactionHistoryView(request):
+    """
+    ویو رندرکننده تاریخچه کامل تراکنش‌ها برای پنل ادمین
+    """
+    # ۱. دریافت پارامترهای فیلتر از فرانت‌اند (شکل تگ‌های Form تمپلیت)
+    search_query = request.GET.get('search', '')
+    tx_type = request.GET.get('tx_type', '')
+
+    # ۲. فراخوانی لایه سرویس برای گرفتن داده‌های فیلتر شده
+    transactions = services.FilterGoldTransactionsService(
+        search_query=search_query, 
+        tx_type=tx_type
+    )
+
+    # ۳. کپسوله‌سازی داده‌ها برای ارسال به تمپلیت
+    context = {
+        'transactions': transactions,
+        'search_query': search_query,
+        'tx_type': tx_type,
+    }
+
+    return render(request, 'transactions/admin_transaction_history.html', context)
