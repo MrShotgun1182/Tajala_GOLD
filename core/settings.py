@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # Project Apps (حالا بدون پیشوند به راحتی شناخته می‌شود)
     'accounts',
     'transactions',
+    'admin_panel',
 ]
 
 MIDDLEWARE = [
