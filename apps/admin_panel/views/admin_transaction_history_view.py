@@ -24,4 +24,4 @@ def AdminTransactionHistoryView(request):
         'tx_type': tx_type,
     }
 
-    return render(request, 'transactions/admin_transaction_history.html', context)
+    return render(request, 'admin_panel/admin_transaction_history.html', context)

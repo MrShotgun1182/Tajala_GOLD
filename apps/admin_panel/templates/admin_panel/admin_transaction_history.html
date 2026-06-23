@@ -1,0 +1,141 @@
+{% extends 'core/base_admin.html' %}
+{% load static %}
+
+{% block title %}تاریخچه تراکنش‌ها | تجلا گلد{% endblock %}
+
+{% block admin_page_title %}دفتر ثبت و سوابق تراکنش‌های طلا{% endblock %}
+
+{% block admin_content %}
+<div class="space-y-6 text-right animate-fadeIn">
+    
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-surface-200 pb-5">
+        <div>
+            <h3 class="text-lg font-black text-surface-900">مدیریت واریز و برداشت‌ها</h3>
+            <p class="text-xs text-surface-500 mt-1">پایش، فیلتر و ثبت تراکنش‌های طلا (۱۸ عیار) و اسناد مالی مشتریان</p>
+        </div>
+        <div class="flex gap-2.5">
+            <a href="#" class="inline-flex items-center justify-center gap-1.5 bg-success text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm hover:opacity-90 transition-all">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                ثبت واریز طلا
+            </a>
+            <a href="#" class="inline-flex items-center justify-center gap-1.5 bg-danger text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm hover:opacity-90 transition-all">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M18 12H6" />
+                </svg>
+                ثبت برداشت طلا
+            </a>
+        </div>
+    </div>
+
+    <div class="rounded-2xl border border-surface-200 bg-white p-4 shadow-sm">
+        <form method="GET" action="" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="lg:col-span-2 relative">
+                <input type="text" name="search" value="{{ search_query }}" placeholder="جستجو بر اساس نام مشتری، شماره تلفن..." 
+                       class="w-full h-11 bg-surface-50 border border-surface-200 rounded-xl px-4 text-xs text-surface-700 focus:outline-none focus:border-secondary-500 focus:bg-white transition-all text-right placeholder-surface-400">
+            </div>
+            
+            <div>
+                <select name="tx_type" class="w-full h-11 bg-surface-50 border border-surface-200 rounded-xl px-3 text-xs text-surface-600 focus:outline-none focus:border-secondary-500 focus:bg-white transition-all">
+                    <option value="">همه تراکنش‌ها</option>
+                    <option value="DEPOSIT" {% if tx_type == 'DEPOSIT' %}selected{% endif %}>فقط واریزها (ورود طلا)</option>
+                    <option value="WITHDRAWAL" {% if tx_type == 'WITHDRAWAL' %}selected{% endif %}>فقط برداشت‌ها (خروج طلا)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="h-11 bg-surface-800 text-white font-bold text-xs rounded-xl hover:bg-surface-900 transition-all shadow-sm flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                اعمال فیلتر گزارش
+            </button>
+        </form>
+    </div>
+
+    <div class="rounded-2xl border border-surface-200 bg-white overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+            <table class="w-full text-right border-collapse text-xs">
+                <thead>
+                    <tr class="bg-surface-50 border-b border-surface-200 text-surface-600 font-bold">
+                        <th class="p-4 pr-5">اطلاعات مشتری</th>
+                        <th class="p-4">نوع تراکنش</th>
+                        <th class="p-4 text-left">مقدار طلا (۱۸ عیار)</th>
+                        <th class="p-4">تاریخ و زمان ثبت</th>
+                        <th class="p-4 max-w-xs">بابت / توضیحات تراکنش</th>
+                        <th class="p-4 text-center pl-5">مدیر ثبت‌کننده</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-surface-100 text-sm text-surface-700">
+                    
+                    {% for tx in transactions %}
+                    <tr class="hover:bg-surface-50/50 transition-colors">
+                        <td class="p-4 pr-5">
+                            <div class="flex flex-col">
+                                <span class="font-bold text-surface-900 text-xs">
+                                    {{ tx.user.get_full_name|default:tx.user.username }}
+                                </span>
+                                <span class="text-[10px] text-surface-400 font-mono mt-0.5">
+                                    {{ tx.user.phone_number }}
+                                </span>
+                            </div>
+                        </td>
+                        
+                        <td class="p-4">
+                            {% if tx.transaction_type == 'DEPOSIT' %}
+                            <span class="inline-flex items-center gap-1.5 text-success bg-primary-50 border border-primary-100 px-2.5 py-1 rounded-lg font-bold text-[11px]">
+                                <span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                                واریز به حساب
+                            </span>
+                            {% else %}
+                            <span class="inline-flex items-center gap-1.5 text-danger bg-rose-50 border border-rose-100 px-2.5 py-1 rounded-lg font-bold text-[11px]">
+                                <span class="w-1.5 h-1.5 rounded-full bg-danger"></span>
+                                برداشت از موجودی
+                            </span>
+                            {% endif %}
+                        </td>
+                        
+                        <td class="p-4 font-mono font-black text-left text-xs tracking-wide {% if tx.transaction_type == 'DEPOSIT' %}text-success{% else %}text-danger{% endif %}">
+                            {% if tx.transaction_type == 'DEPOSIT' %}+{% else %}-{% endif %}{{ tx.gold_weight }} 
+                            <span class="text-[10px] font-normal text-surface-400">گرم</span>
+                        </td>
+                        
+                        <td class="p-4 text-surface-500 font-mono text-xs">
+                            {{ tx.created_at|date:"Y/m/d - H:i" }}
+                        </td>
+                        
+                        <td class="p-4 text-surface-500 text-xs max-w-xs truncate">
+                            {{ tx.description|default:"---" }}
+                        </td>
+                        
+                        <td class="p-4 text-center text-surface-400 text-xs pl-5 font-medium">
+                            {{ tx.recorded_by.get_full_name|default:tx.recorded_by.username }}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="p-12 text-center text-surface-400 text-xs font-medium">
+                            <svg class="w-8 h-8 mx-auto text-surface-300 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                            هیچ تراکنشی با مشخصات فوق در سیستم یافت نشد.
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="bg-surface-50 p-4 border-t border-surface-200 flex items-center justify-between text-xs text-surface-500">
+            <div>نمایش {{ transactions.count }} تراکنش یافته شده</div>
+            <div class="flex items-center gap-1">
+                <button class="bg-white border border-surface-200 px-2.5 py-1.5 rounded-lg text-surface-600 hover:bg-surface-100 transition-all">بعدی</button>
+                <button class="bg-surface-800 text-white font-bold px-3 py-1.5 rounded-lg shadow-sm">۱</button>
+                <button class="bg-white border border-surface-200 px-2.5 py-1.5 rounded-lg text-surface-600 hover:bg-surface-100 transition-all">قبلی</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
