@@ -5,10 +5,12 @@
 
 {% block content %}
 <div class="min-h-screen flex items-center justify-center bg-primary-800 relative overflow-hidden p-4">
+    <!-- افکت‌های نوری پس‌زمینه -->
     <div class="absolute top-[-10%] right-[-10%] w-96 h-96 bg-secondary-500/10 rounded-full blur-3xl"></div>
     <div class="absolute bottom-[-10%] left-[-10%] w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
 
     <div class="w-full max-w-md z-10">
+        <!-- هدر کامپوننت ورود -->
         <div class="text-center mb-8">
             <h1 class="text-5xl font-bold text-secondary-500 mb-2 tracking-tight">تجلا گلد</h1>
             <p class="text-surface-400 text-lg">درخشش اصالت، امنیت دارایی</p>
@@ -17,23 +19,56 @@
         <div class="bg-primary-900/40 backdrop-blur-xl border border-surface-800 p-8 rounded-3xl shadow-2xl">
             <h2 class="text-2xl font-semibold text-white mb-6 text-right">خوش آمدید</h2>
             
+            <!-- 👇 نمایش پیام‌های سیستم (خطای کلی عدم تطابق رمز یا یوزر) -->
+            {% if messages %}
+                <div class="mb-6 space-y-2">
+                    {% for message in messages %}
+                        <div class="p-4 rounded-xl text-sm text-right font-medium {% if message.tags == 'error' %}bg-danger/20 text-danger border border-danger/30{% else %}bg-success/20 text-success border border-success/30{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
             <form method="post" class="space-y-6">
                 {% csrf_token %}
                 
+                <!-- فیلد شماره تماس / نام کاربری -->
                 <div>
                     <label class="block text-surface-300 mb-2 text-right text-sm">شماره همراه یا نام کاربری</label>
-                    <input type="text" name="username" required
-                        class="w-full bg-primary-950/50 border border-surface-700 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-secondary-500 transition-all text-right placeholder-surface-600"
-                        placeholder="0912*******">
+                    <input type="text" 
+                           name="phone_number" 
+                           value="{{ form.phone_number.value|default_if_none:'' }}"
+                           required
+                           class="w-full bg-primary-950/50 border {% if form.phone_number.errors %}border-danger{% else %}border-surface-700{% endif %} text-white px-4 py-3 rounded-xl focus:outline-none focus:border-secondary-500 transition-all text-right placeholder-surface-600"
+                           placeholder="0912*******">
+                    
+                    <!-- نمایش خطاهای اختصاصی فیلد تلفن -->
+                    {% if form.phone_number.errors %}
+                        {% for error in form.phone_number.errors %}
+                            <p class="text-danger text-xs text-right mt-1 font-medium">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
                 </div>
 
+                <!-- فیلد رمز عبور -->
                 <div>
                     <label class="block text-surface-300 mb-2 text-right text-sm">رمز عبور</label>
-                    <input type="password" name="password" required
-                        class="w-full bg-primary-950/50 border border-surface-700 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-secondary-500 transition-all text-right placeholder-surface-600"
-                        placeholder="********">
+                    <input type="password" 
+                           name="password" 
+                           required
+                           class="w-full bg-primary-950/50 border {% if form.password.errors %}border-danger{% else %}border-surface-700{% endif %} text-white px-4 py-3 rounded-xl focus:outline-none focus:border-secondary-500 transition-all text-right placeholder-surface-600"
+                           placeholder="********">
+                    
+                    <!-- نمایش خطاهای اختصاصی فیلد رمز عبور -->
+                    {% if form.password.errors %}
+                        {% for error in form.password.errors %}
+                            <p class="text-danger text-xs text-right mt-1 font-medium">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
                 </div>
 
+                <!-- بخش فراموشی و مرا به خاطر بسپار -->
                 <div class="flex items-center justify-between text-sm">
                     <a href="#" class="text-secondary-400 hover:text-secondary-300 transition-colors">فراموشی رمز عبور؟</a>
                     <div class="flex items-center gap-2">
@@ -42,12 +77,14 @@
                     </div>
                 </div>
 
+                <!-- دکمه سابمیت فرم -->
                 <button type="submit" 
                     class="w-full bg-secondary-500 hover:bg-secondary-600 text-primary-950 font-bold py-4 rounded-xl transition-all shadow-lg shadow-secondary-500/20 active:scale-95">
                     ورود به حساب کاربری
                 </button>
             </form>
 
+            <!-- بخش ثبت‌نام -->
             <div class="mt-8 pt-6 border-t border-surface-800 text-center">
                 <p class="text-surface-400">
                     هنوز عضو نشده‌اید؟ 
@@ -56,8 +93,9 @@
             </div>
         </div>
 
+        <!-- فوتر -->
         <p class="text-center text-surface-600 text-xs mt-8">
-            &copy; 2024 Tajala Gold. تمامی حقوق محفوظ است.
+            &copy; 2026 Tajala Gold. تمامی حقوق محفوظ است.
         </p>
     </div>
 </div>

@@ -31,3 +31,9 @@ class UserModel(AbstractUser):
     def __str__(self):
         full_name = self.get_full_name()
         return full_name if full_name else self.phone_number
+    
+    def save(self, *args, **kwargs):
+        # اگر کاربر سوپریوزر یا کارمند (is_staff) بود، نقش او را به صورت خودکار ادمین قرار بده
+        if self.is_superuser or self.is_staff:
+            self.role = 'admin'
+        super().save(*args, **kwargs)

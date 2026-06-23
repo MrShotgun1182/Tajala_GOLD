@@ -23,12 +23,14 @@ def LoginView(request):
                 login(request, user)
                 messages.success(request, "خوش آمدید!")
                 
-                if user.role == 'admin':
-                    return redirect('admin_dashboard')
+                if user.role == 'admin' or user.is_superuser:
+                    return redirect('admin_panel:admin_dashboard') 
                 return redirect('customer_panel')
             else:
                 messages.error(request, "شماره تماس یا رمز عبور اشتباه است.")
+                return redirect('accounts:login')
         else:
             messages.error(request, "لطفاً اطلاعات ورودی را اصلاح کنید.")
+            return redirect('accounts:login')
 
     return render(request, 'accounts/login.html', {'form': form})
