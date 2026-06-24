@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     
     # Project Apps (حالا بدون پیشوند به راحتی شناخته می‌شود)
     'accounts',
