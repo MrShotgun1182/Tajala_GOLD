@@ -4,6 +4,7 @@ from django.core.validators import MinValueValidator
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from decimal import Decimal
+from customers import models as customers_models 
 
 class GoldTransactionModel(models.Model):
     """
@@ -16,12 +17,11 @@ class GoldTransactionModel(models.Model):
         ('WITHDRAWAL', 'برداشت (کاهش موجودی طلا)'),
     ]
 
-    # ارتباط با مشتری (فقط کاربران با نقش customer)
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+    # اصلاح شده: ارتباط مستقیم با مشتری به‌جای مدل کاربر خام
+    customer = models.ForeignKey(
+        customers_models.CustomerModel,
         on_delete=models.PROTECT,
         related_name='gold_transactions',
-        limit_choices_to={'role': 'customer'},
         verbose_name="مشتری"
     )
 
@@ -47,7 +47,7 @@ class GoldTransactionModel(models.Model):
         verbose_name="قیمت هر گرم طلا (ریال)"
     )
 
-    # ثبت‌کننده تراکنش (فقط مدیران سیستم)
+    # ثبت‌کننده تراکنش (فقط کاربران سیستم با نقش ادمین)
     recorded_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
@@ -84,21 +84,22 @@ class GoldTransactionModel(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        user_display = self.user.get_full_name() if self.user.get_full_name() else self.user.phone_number
+        # دسترسی به کاربرِ متصل به مشتری برای نمایش نام یا شماره تماس
+        customer_user = self.customer.user
+        customer_display = customer_user.get_full_name() if customer_user.get_full_name() else customer_user.phone_number
         deleted_tag = " [حذف شده]" if self.deleted_at else ""
-        return f"{user_display} - {self.get_transaction_type_display()} - {self.gold_weight}g{deleted_tag}"
+        return f"{customer_display} - {self.get_transaction_type_display()} - {self.gold_weight}g{deleted_tag}"
 
     def save(self, *args, **kwargs):
         """
         مکانیزم امنیتی برای جلوگیری از هرگونه ویرایش پس از اولین ثبت دیتابیس.
-        در این ساختار جدید، حتی توضیحات هم قفل می‌شود تا فاکتور کاملاً دست‌نخورده بماند.
         """
         if self.pk:  # اگر رکورد از قبل وجود داشته باشد (تلاش برای آپدیت)
-            original = GoldTransaction.objects.get(pk=self.pk)
+            # اصلاح شده: استفاده از GoldTransactionModel به‌جای GoldTransaction
+            original = GoldTransactionModel.objects.get(pk=self.pk)
             
-            # اگر ادمین دکمه حذف را زده باشد، فقط فیلد deleted_at تغییر می‌کند که مجاز است.
-            # اما بقیه فیلدها نباید تحت هیچ شرایطی تغییر کنند.
-            if (self.user_id != original.user_id or 
+            # بررسی تغییر فیلدها (user_id به customer_id تغییر یافت)
+            if (self.customer_id != original.customer_id or 
                 self.transaction_type != original.transaction_type or 
                 self.gold_weight != original.gold_weight or 
                 self.gold_price_per_gram != original.gold_price_per_gram or

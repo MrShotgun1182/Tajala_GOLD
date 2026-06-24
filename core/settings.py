@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'accounts',
     'transactions',
     'admin_panel',
+    'customers',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,6 @@ STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, 'staticfiles'))
 # https://docs.djangoproject.com/en/6.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

@@ -1,0 +1,73 @@
+{% extends 'core/base_customer.html' %}
+{% load static %}
+
+{% block page_title %}داشبورد کاربری | تجلا گلد{% endblock %}
+
+{% block header_title %}پیشخوان کاربری{% endblock %}
+
+{% block sidebar_active_label %}داشبورد اصلی{% endblock %}
+
+{% block page_main %}
+    <!-- گرید دو ستونه -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+        
+        <!-- کارت بزرگ دارایی -->
+        <div class="lg:col-span-2 rounded-3xl border border-primary-300 bg-gradient-to-br from-primary-100/90 via-primary-200/70 to-primary-200/40 backdrop-blur-xl p-6 md:p-8 flex flex-col justify-between shadow-xl relative overflow-hidden min-h-[220px]">
+            <div class="absolute top-0 right-0 w-80 h-80 bg-[radial-gradient(circle_at_top_right,rgba(52,98,85,0.08),transparent_50%)] pointer-events-none"></div>
+            
+            <div class="flex flex-col sm:flex-row justify-between items-start gap-4 pb-4">
+                <div class="space-y-1">
+                    <span class="bg-primary-300/30 text-primary-700 border border-primary-400/30 px-3 py-1 rounded-full text-xs font-semibold inline-block">حساب امانی</span>
+                    <h3 class="text-lg md:text-xl font-bold text-primary-800 pt-2">خوش آمدید، کاربر گرامی</h3>
+                    <p class="text-primary-600 text-xs">مجموع طلاهای امانتی ثبت شده در صندوق امن گالری</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between border-t border-primary-300/60 pt-6 mt-4 gap-4">
+                <div class="text-right">
+                    <span class="text-xs text-primary-600 block mb-1">وزن کل موجودی طلای شما:</span>
+                    <div class="text-3xl md:text-5xl font-black text-primary-800 tracking-tight inline-block">۲۴.۷۵۰</div>
+                    <span class="text-sm md:text-base text-primary-600 font-black mr-2">گرم</span>
+                </div>
+                <div class="text-left">
+                    <span class="text-xs text-primary-600 block mb-1">ارزش ریالی معادل کل دارایی:</span>
+                    <div class="text-xl md:text-2xl font-bold text-primary-800 tracking-wide inline-block">۱,۰۵۱,۸۷۵,۰۰۰</div>
+                    <span class="text-xs text-primary-500 font-medium mr-1">ریال</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- باکس سلب مسئولیت (با رنگ هشدار ملایم) -->
+        <div class="lg:col-span-1 rounded-3xl border border-amber-500/20 bg-amber-500/5 p-6 md:p-8 flex flex-col justify-between shadow-xl">
+            <div class="space-y-3 text-right">
+                <div class="flex items-center gap-2.5 text-amber-600">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <span class="font-bold text-sm text-amber-700">اطلاعیه و ضوابط نوسان بازار</span>
+                </div>
+                <p class="text-primary-600 text-xs leading-relaxed">
+                    ارزش ریالی فوق بر مبنای آخرین نرخ طلای ۱۸ عیار محاسبه گردیده و صرفاً جنبه برآورد آنلاین دارد. محاسبه قطعی و نهایی ارزش حساب شما منحصراً در زمان مراجعه حضوری به فروشگاه انجام می‌پذیرد.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- باکس راهنما پایینی -->
+    <div class="bg-primary-200/40 border border-primary-300/40 rounded-2xl p-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-3 text-right">
+            <div class="w-10 h-10 rounded-xl bg-primary-300/30 border border-primary-300/60 flex items-center justify-center text-primary-700">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <div>
+                <h4 class="text-sm font-bold text-primary-800">نیاز به دریافت یا تسویه طلای امانی خود دارید؟</h4>
+                <p class="text-xs text-primary-600 mt-0.5">می‌توانید با به همراه داشتن مدارک شناسایی به شعبه مرکزی گالری مراجعه فرمایید.</p>
+            </div>
+        </div>
+        <a href="#" class="bg-primary-500 hover:bg-primary-600 text-white text-sm font-bold px-6 py-2.5 rounded-xl transition-all shadow-md shadow-primary-500/20 whitespace-nowrap">
+            مشاهده شعبه‌ها
+        </a>
+    </div>
+{% endblock %}
