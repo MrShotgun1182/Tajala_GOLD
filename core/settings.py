@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'transactions',
     'admin_panel',
     'customers',
+    'categorys',
 ]
 
 MIDDLEWARE = [
