@@ -25,7 +25,7 @@ def LoginView(request):
                 
                 if user.role == 'admin' or user.is_superuser:
                     return redirect('admin_panel:admin_dashboard') 
-                return redirect('customer_panel')
+                return redirect('customers:customer_dashboard')
             else:
                 messages.error(request, "شماره تماس یا رمز عبور اشتباه است.")
                 return redirect('accounts:login')

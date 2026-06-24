@@ -1,1 +1,3 @@
 from .authenticate_user_service import AuthenticateUserService
+from .create_customer_service import CreateCustomerService
+from .update_customer_service import UpdateCustomerService
