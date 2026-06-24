@@ -1,5 +1,4 @@
 from categorys.models import ProductCategoryModel
-from django.shortcuts import get_object_or_view_404
 
 def GetProductCategoriesService():
     """

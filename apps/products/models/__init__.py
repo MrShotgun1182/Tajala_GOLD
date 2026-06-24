@@ -1,0 +1,2 @@
+from .product_model import ProductModel
+from .product_image_model import ProductImageModel

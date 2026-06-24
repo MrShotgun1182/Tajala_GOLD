@@ -1,0 +1,5 @@
+from .create_product_service import CreateProductService
+from .get_products_service import GetActiveProductsService
+from .get_product_by_slug_service import GetProductBySlugService
+from .update_product_service import UpdateProductService
+from .delete_product_service import DeleteProductService
