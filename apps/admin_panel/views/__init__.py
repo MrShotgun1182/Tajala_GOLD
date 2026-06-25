@@ -4,3 +4,4 @@ from .admin_products.admin_product_detail_view import AdminProductDetailView
 from .admin_products.admin_product_list_view import AdminProductListView
 from .admin_transactions.gold_transaction_view import GoldTransactionView
 from .admin_customers.admin_customer_search_api import AdminCustomerSearchApi
+from .admin_products.admin_create_product_view import AdminCreateProductView
