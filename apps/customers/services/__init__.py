@@ -1,1 +1,2 @@
 from .get_customer_by_phone_service import GetCustomerByPhoneService
+from .get_active_products_service import GetActiveProductsService

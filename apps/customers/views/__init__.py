@@ -1,1 +1,2 @@
 from .customer_dashboard_view import CustomerDashboardView
+from .customer_product.customer_showcase_view import CustomerShowcaseView

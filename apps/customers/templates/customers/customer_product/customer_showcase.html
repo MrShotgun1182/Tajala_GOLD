@@ -1,0 +1,86 @@
+{% extends 'core/base_customer.html' %}
+{% load static %}
+
+{% block page_title %}کاتالوگ زیورآلات | تجلا گلد{% endblock %}
+{% block header_title %}ویترین زیورآلات و مسکوکات{% endblock %}
+{% block sidebar_active_label %}کاتالوگ زیورآلات{% endblock %}
+
+{% block page_main %}
+    <!-- نوار فیلتر و عنوان -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-primary-300/60 pb-4">
+        <div class="text-right">
+            <span class="text-xs text-primary-600 block mb-0.5">جدیدترین دسته‌بندی‌های موجود</span>
+            <h3 class="text-base font-bold text-primary-800">محصولات آماده تحویل و ساخت</h3>
+        </div>
+
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+            <!-- دکمه همه محصولات -->
+            <a href="?category=all" 
+               class="{% if current_category == 'all' %}bg-primary-500 text-white shadow-md{% else %}bg-primary-200/60 border border-primary-300 text-primary-700 hover:text-primary-900{% endif %} text-xs font-bold px-4 py-2 rounded-xl whitespace-nowrap transition-colors">
+                همه زیورآلات
+            </a>
+
+            <!-- حلقه دسته‌بندی‌ها -->
+            {% for cat in categories %}
+                <a href="?category={{ cat.slug }}" 
+                   class="{% if current_category == cat.slug %}bg-primary-500 text-white shadow-md{% else %}bg-primary-200/60 border border-primary-300 text-primary-700 hover:text-primary-900{% endif %} text-xs px-4 py-2 rounded-xl whitespace-nowrap transition-colors">
+                    {{ cat.title }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- گرید محصولات -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6">
+        
+        {% for product in products %}
+        <a href="/product/{{ product.slug }}/" 
+           class="group rounded-3xl border border-primary-300 bg-gradient-to-b from-primary-100/90 to-primary-200/70 backdrop-blur-xl p-4 flex flex-col justify-between shadow-xl transition-all duration-300 hover:border-primary-400 hover:shadow-2xl hover:-translate-y-1">
+            
+            <!-- عکس محصول -->
+            <div class="relative w-full aspect-square rounded-2xl bg-primary-200/80 border border-primary-300/60 overflow-hidden mb-4">
+                <div class="absolute inset-0 bg-gradient-to-t from-primary-200 via-transparent to-transparent opacity-60 z-10"></div>
+                
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.title }}" 
+                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                {% else %}
+                    <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=400&auto=format&fit=crop" 
+                         alt="{{ product.title }}" 
+                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                {% endif %}
+                
+                <span class="absolute top-3 right-3 z-20 bg-emerald-100 text-emerald-700 border border-emerald-300 text-[10px] font-bold px-2.5 py-1 rounded-full">
+                    {{ product.category.title }}
+                </span>
+            </div>
+
+            <!-- اطلاعات محصول -->
+            <div class="space-y-3 text-right">
+                <div>
+                    <span class="text-[10px] text-primary-600 block mb-0.5">شناسه داخلی: {{ product.id }}</span>
+                    <h4 class="text-sm font-bold text-primary-800 group-hover:text-primary-600 transition-colors">{{ product.title }}</h4>
+                </div>
+
+                <div class="flex items-center justify-between bg-primary-200/40 border border-primary-300/40 rounded-xl p-2.5">
+                    <div class="text-right">
+                        <span class="text-[9px] text-primary-600 block">وزن محصول</span>
+                        <span class="text-sm font-black text-primary-800 tracking-wide">{{ product.weight }}</span> 
+                        <span class="text-[10px] text-primary-600">گرم</span>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-[9px] text-primary-600 block">عیار محصول</span>
+                        <span class="text-xs font-bold text-primary-600">۱۸ عیار (۷۵۰)</span>
+                        <!-- در صورت وجود فیلد عیار در مدل، می‌توانید آن را جایگزین کنید -->
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% empty %}
+        <div class="col-span-full text-center py-12 bg-primary-100/50 rounded-3xl border border-dashed border-primary-300">
+            <p class="text-sm text-primary-600">هیچ محصول فعالی در این دسته‌بندی روی ویترین یافت نشد 😐</p>
+        </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}
