@@ -3,3 +3,4 @@ from .get_products_service import GetActiveProductsService
 from .get_product_by_slug_service import GetProductBySlugService
 from .update_product_service import UpdateProductService
 from .delete_product_service import DeleteProductService
+from .get_product_detail_service import GetProductDetailService
