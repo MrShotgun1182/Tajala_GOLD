@@ -1,1 +1,2 @@
 from .customers_model import CustomerModel
+from .customer_goal_model import CustomerGoalModel

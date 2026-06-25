@@ -1,2 +1,5 @@
 from .get_customer_by_phone_service import GetCustomerByPhoneService
 from .get_active_products_service import GetActiveProductsService
+from .toggle_customer_goal_service import ToggleCustomerGoalService
+from .get_customer_goals_service import GetCustomerGoalsService
+from .check_product_targeted_service import CheckProductTargetedService

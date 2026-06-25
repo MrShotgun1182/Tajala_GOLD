@@ -60,8 +60,27 @@
         </div>
     </div>
 
+    <!-- بخش جدید: اهداف خرید و نشان‌شده‌ها -->
+    <div class="bg-gradient-to-b from-primary-100/80 to-primary-200/50 border border-primary-300 rounded-3xl p-6 mt-6">
+        <h3 class="text-base font-bold text-primary-900 mb-4">🎯 اهداف خرید و نشان‌شده‌های شما</h3>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {% for goal in goals %}
+            <a href="{% url 'customers:product_detail' goal.product.slug %}" class="flex items-center gap-3 p-3 bg-white/60 border border-primary-300/70 rounded-2xl hover:border-primary-400 transition-all">
+                <img src="{{ goal.product.image.url }}" class="w-12 h-12 object-cover rounded-xl border border-primary-200">
+                <div class="text-right">
+                    <h4 class="text-xs font-bold text-primary-800">{{ goal.product.title }}</h4>
+                    <span class="text-[10px] text-primary-600">{{ goal.product.weight }} گرم</span>
+                </div>
+            </a>
+            {% empty %}
+            <p class="text-xs text-primary-600 col-span-full text-center py-4">هنوز هیچ محصولی را به عنوان هدف خرید مشخص نکرده‌اید.</p>
+            {% endfor %}
+        </div>
+    </div>
+
     <!-- باکس راهنما پایینی -->
-    <div class="bg-primary-200/40 border border-primary-300/40 rounded-2xl p-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+    <div class="bg-primary-200/40 border border-primary-300/40 rounded-2xl p-6 mt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
         <div class="flex items-center gap-3 text-right">
             <div class="w-10 h-10 rounded-xl bg-primary-300/30 border border-primary-300/60 flex items-center justify-center text-primary-700">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

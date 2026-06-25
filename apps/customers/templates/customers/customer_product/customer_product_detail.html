@@ -135,15 +135,22 @@
                 <a href="#" class="flex-1 bg-secondary-500 hover:bg-secondary-600 border border-secondary-600 text-secondary-950 font-bold text-sm text-center py-3.5 rounded-2xl shadow-lg transition-all duration-300 hover:-translate-y-0.5">
                     ثبت سفارش
                 </a>
-                <button onclick="alert('لینک کپی شد!')" class="bg-primary-200/60 hover:bg-primary-200 border border-primary-300 text-primary-800 font-bold text-sm px-6 py-3.5 rounded-2xl transition-colors">
-                    نشان بعنوان هدف 
+                
+                <button id="goal-btn" onclick="toggleGoal('{{ product.slug }}')" 
+                        class="{% if is_targeted %}bg-secondary-500 text-secondary-950 border-secondary-600{% else %}bg-primary-200/60 text-primary-800 border-primary-300{% endif %} border font-bold text-sm px-6 py-3.5 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer">
+                    <svg id="goal-icon" class="w-4 h-4 text-primary-600 transition-colors" 
+                        fill="{% if is_targeted %}currentColor{% else %}none{% endif %}" 
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                    </svg>
+                    <span id="goal-text">{% if is_targeted %}هدف قرار داده شد{% else %}نشان بعنوان هدف{% endif %}</span>
                 </button>
             </div>
         </div>
     </div>
 
     <!-- اسکریپت تغییر تصویر اصلی -->
-    <script>
+<script>
         function changeMainImage(imageUrl) {
             const mainImg = document.getElementById('main-product-image');
             mainImg.style.opacity = '0';
@@ -151,6 +158,62 @@
                 mainImg.src = imageUrl;
                 mainImg.style.opacity = '1';
             }, 150);
+        }
+
+        function toggleGoal(slug) {
+            // ۱. تست اولیه: آیا کلیک روی دکمه کار میکند؟
+            console.log("تابع برای اسلاگ اجرا شد: ", slug);
+            
+            const btn = document.getElementById('goal-btn');
+            const text = document.getElementById('goal-text');
+            const icon = document.getElementById('goal-icon');
+            
+            // آدرس‌دهی دقیق بر اساس ساختار روت‌های پروژه شما (همراه با پیشوند نِیم‌اسپیس)
+            const targetUrl = `/customers/product/${slug}/toggle-goal/`;
+            
+            fetch(targetUrl, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("پاسخ سرور نامعتبر بود! وضعیت کُد: " + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.status === 'success') {
+                    if (data.is_added) {
+                        // نمایش آلرت موفقیت آمیز خرید هدف
+                        alert("🎯 محصول با موفقیت به اهداف خرید شما در داشبورد اضافه شد!");
+                        
+                        // تغییر رنگ مستقیم استایل دکمه به طلایی/amber
+                        btn.style.backgroundColor = "#f59e0b"; 
+                        btn.style.color = "#000000";
+                        icon.setAttribute('fill', 'currentColor');
+                        text.innerText = 'هدف قرار داده شد';
+                    } else {
+                        // نمایش آلرت حذف
+                        alert("❌ محصول از لیست اهداف خرید شما حذف شد.");
+                        
+                        // بازگرداندن رنگ به حالت اولیه خنثی
+                        btn.style.backgroundColor = "rgba(209, 213, 219, 0.4)"; 
+                        btn.style.color = "#1f2937";
+                        icon.setAttribute('fill', 'none');
+                        text.innerText = 'نشان بعنوان هدف';
+                    }
+                } else {
+                    alert("خطایی از سمت دیتابیس گزارش شد: " + data.message);
+                }
+            })
+            .catch(err => {
+                // اگر روت اشتباه باشد یا ارور ۵۰۰ رخ دهد، اینجا به شما آلرت می‌دهد چی خراب است
+                alert("🚨 خطا در ارسال درخواست ایجکس!\nلطفاً کنسول مرورگر (F12) را چک کنید.\nپیام خطا: " + err.message);
+                console.error(err);
+            });
         }
     </script>
 {% endblock %}
