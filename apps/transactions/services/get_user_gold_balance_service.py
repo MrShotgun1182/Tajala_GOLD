@@ -1,25 +1,20 @@
 from decimal import Decimal
-from django.contrib.auth import get_user_model
 from transactions import models
-from django.core.exceptions import ObjectDoesNotExist
+from customers.models import CustomerModel
 
-User = get_user_model()
-
-def GetUserGoldBalanceService(user_id: int) -> Decimal:
+def GetUserGoldBalanceService(customer_id: int) -> Decimal:
     """
-    محاسبه موجودی کل طلای یک کاربر بر اساس تراکنش‌های فعال مشتری (حذف‌نشده).
+    محاسبه موجودی کل طلای یک مشتری بر اساس تراکنش‌های فعال و حذف‌نشده (deleted_at IS NULL).
     """
     try:
-        # پیدا کردن کاربر و دریافت ایدی پروفایل مشتری او
-        user = User.objects.get(id=user_id)
-        # با توجه به related_name='customer_profile' در مدل مشتری شما:
-        customer_id = user.customer_profile.id
-    except (User.DoesNotExist, ObjectDoesNotExist):
+        # بررسی وجود مشتری در سامانه
+        customer = CustomerModel.objects.get(id=customer_id)
+    except CustomerModel.DoesNotExist:
         return Decimal('0.0000')
 
-    # دریافت تمام تراکنش‌های حذف‌نشده با استفاده از کلید واژه درست دیتابیس (customer_id)
+    # دریافت تمام تراکنش‌های فعال مشتری بر اساس کلید خارجی مدل جدید (customer_id)
     active_transactions = models.GoldTransactionModel.objects.filter(
-        customer_id=customer_id,
+        customer_id=customer.id,
         deleted_at__isnull=True
     )
     
