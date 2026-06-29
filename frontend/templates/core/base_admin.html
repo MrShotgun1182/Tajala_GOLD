@@ -9,6 +9,7 @@
     <div class="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-primary-700/5 rounded-full blur-[160px] pointer-events-none"></div>
     <div class="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-secondary-400/5 rounded-full blur-[140px] pointer-events-none"></div>
 
+    <!-- سایدبار دسکتاپ -->
     <aside class="hidden md:flex w-72 bg-surface-50/90 backdrop-blur-xl border-l border-primary-300/20 p-6 flex-col justify-between z-20 shrink-0 h-screen sticky top-0 shadow-sm">
         <div class="space-y-8">
             <div class="flex items-center gap-3 border-b border-primary-300/10 pb-6">
@@ -24,22 +25,43 @@
             </div>
 
             <nav class="space-y-1.5">
-                <a href="{% url 'admin_panel:admin_dashboard' %}" class="relative flex items-center gap-3 bg-primary-700 text-secondary-400 font-black px-4 py-3 rounded-xl transition-all shadow-md shadow-primary-700/10 group">
-                    <svg class="w-5 h-5 text-secondary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <!-- داشبورد -->
+                <a href="{% url 'admin_panel:admin_dashboard' %}" 
+                   class="relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all group
+                   {% if request.resolver_match.url_name == 'admin_dashboard' %}
+                        bg-primary-700 text-secondary-400 shadow-md shadow-primary-700/10 font-black
+                   {% else %}
+                        text-primary-700/70 hover:text-primary-800 hover:bg-surface-100
+                   {% endif %}">
+                    <svg class="w-5 h-5 {% if request.resolver_match.url_name == 'admin_dashboard' %}text-secondary-400{% else %}text-primary-600/50 group-hover:text-primary-700{% endif %} transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                     </svg>
                     <span class="text-sm">داشبورد</span>
                 </a>
 
-                <a href="{% url 'admin_panel:transactions_history' %}" class="relative flex items-center gap-3 text-primary-700/70 hover:text-primary-800 hover:bg-surface-100 px-4 py-3 rounded-xl transition-all group overflow-hidden">
-                    <svg class="w-5 h-5 text-primary-600/50 group-hover:text-primary-700 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <!-- مدیریت تراکنش -->
+                <a href="{% url 'admin_panel:transactions_history' %}" 
+                   class="relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all group overflow-hidden
+                   {% if request.resolver_match.url_name == 'transactions_history' %}
+                        bg-primary-700 text-secondary-400 shadow-md shadow-primary-700/10 font-black
+                   {% else %}
+                        text-primary-700/70 hover:text-primary-800 hover:bg-surface-100
+                   {% endif %}">
+                    <svg class="w-5 h-5 {% if request.resolver_match.url_name == 'transactions_history' %}text-secondary-400{% else %}text-primary-600/50 group-hover:text-primary-700{% endif %} transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                     <span class="text-sm font-bold relative z-10">مدیریت تراکنش</span>
                 </a>
 
-                <a href="{% url 'admin_panel:products_list' %}" class="relative flex items-center gap-3 text-primary-700/70 hover:text-primary-800 hover:bg-surface-100 px-4 py-3 rounded-xl transition-all group overflow-hidden">
-                    <svg class="w-5 h-5 text-primary-600/50 group-hover:text-primary-700 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <!-- مدیریت ویترین آنلاین -->
+                <a href="{% url 'admin_panel:products_list' %}" 
+                   class="relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all group overflow-hidden
+                   {% if request.resolver_match.url_name == 'products_list' %}
+                        bg-primary-700 text-secondary-400 shadow-md shadow-primary-700/10 font-black
+                   {% else %}
+                        text-primary-700/70 hover:text-primary-800 hover:bg-surface-100
+                   {% endif %}">
+                    <svg class="w-5 h-5 {% if request.resolver_match.url_name == 'products_list' %}text-secondary-400{% else %}text-primary-600/50 group-hover:text-primary-700{% endif %} transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                     <span class="text-sm font-bold relative z-10">مدیریت ویترین آنلاین</span>
@@ -91,22 +113,46 @@
         </main>
     </div>
 
+    <!-- منوی ناوبری موبایل پایین صفحه -->
     <div class="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-surface-50/95 backdrop-blur-lg border-t border-primary-300/20 p-2 shadow-xl">
         <div class="max-w-md mx-auto flex items-center justify-around">
-            <a href="#" class="flex flex-col items-center justify-center gap-1 px-2 py-1 text-primary-700 font-black transition-all text-center">
-                <svg class="w-5 h-5 text-primary-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <!-- داشبورد موبایل -->
+            <a href="{% url 'admin_panel:admin_dashboard' %}" 
+               class="flex flex-col items-center justify-center gap-1 px-2 py-1 transition-all text-center
+               {% if request.resolver_match.url_name == 'admin_dashboard' %}
+                    text-primary-700 font-black
+               {% else %}
+                    text-primary-600/60
+               {% endif %}">
+                <svg class="w-5 h-5 {% if request.resolver_match.url_name == 'admin_dashboard' %}text-primary-700{% else %}text-primary-600/40{% endif %}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                 </svg>
                 <span class="text-[9px] leading-none">داشبورد</span>
             </a>
-            <a href="#" class="flex flex-col items-center justify-center gap-1 px-2 py-1 text-primary-600/60 transition-all text-center">
-                <svg class="w-5 h-5 text-primary-600/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            
+            <!-- مشتریان/تراکنش موبایل -->
+            <a href="{% url 'admin_panel:transactions_history' %}" 
+               class="flex flex-col items-center justify-center gap-1 px-2 py-1 transition-all text-center
+               {% if request.resolver_match.url_name == 'transactions_history' %}
+                    text-primary-700 font-black
+               {% else %}
+                    text-primary-600/60
+               {% endif %}">
+                <svg class="w-5 h-5 {% if request.resolver_match.url_name == 'transactions_history' %}text-primary-700{% else %}text-primary-600/40{% endif %}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
-                <span class="text-[9px] leading-none font-bold">مشتریان</span>
+                <span class="text-[9px] leading-none font-bold">تراکنش‌ها</span>
             </a>
-            <a href="#" class="flex flex-col items-center justify-center gap-1 px-3 py-1.5 rounded-xl bg-primary-700 text-secondary-400 font-black shadow-md shadow-primary-700/10 text-center">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+            <!-- ویترین موبایل -->
+            <a href="{% url 'admin_panel:products_list' %}" 
+               class="flex flex-col items-center justify-center gap-1 px-2 py-1 transition-all text-center
+               {% if request.resolver_match.url_name == 'products_list' %}
+                    px-3 py-1.5 rounded-xl bg-primary-700 text-secondary-400 font-black shadow-md shadow-primary-700/10
+               {% else %}
+                    text-primary-600/60
+               {% endif %}">
+                <svg class="w-5 h-5 {% if request.resolver_match.url_name == 'products_list' %}text-secondary-400{% else %}text-primary-600/40{% endif %}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 <span class="text-[9px] leading-none">ویترین</span>

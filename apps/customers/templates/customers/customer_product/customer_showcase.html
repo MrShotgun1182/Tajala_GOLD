@@ -7,40 +7,49 @@
 
 {% block page_main %}
     <!-- نوار فیلتر و عنوان -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-primary-300/60 pb-4">
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-primary-300/10 pb-5">
         <div class="text-right">
-            <span class="text-xs text-primary-600 block mb-0.5">جدیدترین دسته‌بندی‌های موجود</span>
-            <h3 class="text-base font-bold text-primary-800">محصولات آماده تحویل و ساخت</h3>
+            <span class="text-[11px] font-bold text-surface-500 block mb-1">جدیدترین دسته‌بندی‌های موجود در گالری</span>
+            <h3 class="text-base font-black text-primary-700">محصولات آماده تحویل و ساخت</h3>
         </div>
 
+        <!-- فیلتر دکمه‌ها با استایل منسجم متناسب با دکمه‌های ناوبری -->
         <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
             <!-- دکمه همه محصولات -->
             <a href="?category=all" 
-               class="{% if current_category == 'all' %}bg-primary-500 text-white shadow-md{% else %}bg-primary-200/60 border border-primary-300 text-primary-700 hover:text-primary-900{% endif %} text-xs font-bold px-4 py-2 rounded-xl whitespace-nowrap transition-colors">
+               class="text-xs font-bold px-4 py-2.5 rounded-xl whitespace-nowrap transition-all border
+               {% if current_category == 'all' or not current_category %}
+                    bg-primary-700 text-secondary-400 border-primary-700 shadow-md shadow-primary-700/10
+               {% else %}
+                    bg-white text-surface-600 border-primary-300/10 hover:bg-surface-100 hover:text-primary-700
+               {% endif %}">
                 همه زیورآلات
             </a>
 
             <!-- حلقه دسته‌بندی‌ها -->
             {% for cat in categories %}
                 <a href="?category={{ cat.slug }}" 
-                   class="{% if current_category == cat.slug %}bg-primary-500 text-white shadow-md{% else %}bg-primary-200/60 border border-primary-300 text-primary-700 hover:text-primary-900{% endif %} text-xs px-4 py-2 rounded-xl whitespace-nowrap transition-colors">
+                   class="text-xs font-bold px-4 py-2.5 rounded-xl whitespace-nowrap transition-all border
+                   {% if current_category == cat.slug %}
+                        bg-primary-700 text-secondary-400 border-primary-700 shadow-md shadow-primary-700/10
+                   {% else %}
+                        bg-white text-surface-600 border-primary-300/10 hover:bg-surface-100 hover:text-primary-700
+                   {% endif %}">
                     {{ cat.title }}
                 </a>
             {% endfor %}
         </div>
     </div>
 
-    <!-- گرید محصولات -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6">
+    <!-- گرید محصولات به صورت کارت‌های کشیده و افقی (یک ستونه در موبایل و دو ستونه در دسکتاپ بزرگ) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 mt-6">
         
         {% for product in products %}
         <a href="/customers/product/{{ product.slug }}/" 
-           class="group rounded-3xl border border-primary-300 bg-gradient-to-b from-primary-100/90 to-primary-200/70 backdrop-blur-xl p-4 flex flex-col justify-between shadow-xl transition-all duration-300 hover:border-primary-400 hover:shadow-2xl hover:-translate-y-1">
+           class="group rounded-2xl border border-primary-300/10 bg-white/80 backdrop-blur-md p-3.5 flex items-center gap-4 shadow-sm transition-all duration-300 hover:border-primary-300/30 hover:shadow-md hover:-translate-y-0.5">
             
-            <!-- عکس محصول -->
-            <div class="relative w-full aspect-square rounded-2xl bg-primary-200/80 border border-primary-300/60 overflow-hidden mb-4">
-                <div class="absolute inset-0 bg-gradient-to-t from-primary-200 via-transparent to-transparent opacity-60 z-10"></div>
-                
+            <!-- عکس محصول (بخش ثابت و مربعی سمت راست کارت کشیده) -->
+            <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-surface-100 border border-primary-300/10 overflow-hidden shrink-0">
                 {% if product.image %}
                     <img src="{{ product.image.url }}" alt="{{ product.title }}" 
                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
@@ -50,35 +59,41 @@
                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                 {% endif %}
                 
-                <span class="absolute top-3 right-3 z-20 bg-emerald-100 text-emerald-700 border border-emerald-300 text-[10px] font-bold px-2.5 py-1 rounded-full">
+                <!-- لیبل دسته‌بندی ظریف روی عکس -->
+                <span class="absolute bottom-1.5 right-1.5 z-10 bg-primary-900/80 text-secondary-400 text-[8px] font-bold px-2 py-0.5 rounded-md backdrop-blur-sm">
                     {{ product.category.title }}
                 </span>
             </div>
 
-            <!-- اطلاعات محصول -->
-            <div class="space-y-3 text-right">
+            <!-- اطلاعات محصول (کاملاً مینیمال: تیتر و وزن) -->
+            <div class="flex-1 flex flex-col justify-between h-24 sm:h-28 text-right py-1">
                 <div>
-                    <span class="text-[10px] text-primary-600 block mb-0.5">شناسه داخلی: {{ product.id }}</span>
-                    <h4 class="text-sm font-bold text-primary-800 group-hover:text-primary-600 transition-colors">{{ product.title }}</h4>
+                    <h4 class="text-sm font-black text-surface-900 group-hover:text-primary-700 transition-colors line-clamp-2 leading-snug">
+                        {{ product.title }}
+                    </h4>
                 </div>
 
-                <div class="flex items-center justify-between bg-primary-200/40 border border-primary-300/40 rounded-xl p-2.5">
-                    <div class="text-right">
-                        <span class="text-[9px] text-primary-600 block">وزن محصول</span>
-                        <span class="text-sm font-black text-primary-800 tracking-wide">{{ product.weight }}</span> 
-                        <span class="text-[10px] text-primary-600">گرم</span>
+                <!-- باکس نمایش وزن طلا با هماهنگی کامل استایل‌ها -->
+                <div class="flex items-center justify-between border-t border-primary-300/10 pt-2.5">
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-xs text-surface-500 font-bold">وزن ساخت:</span>
+                        <span class="text-base font-black text-primary-700 tracking-wide font-mono">{{ product.weight }}</span> 
+                        <span class="text-[10px] text-surface-500 font-bold">گرم</span>
                     </div>
-                    <div class="text-left">
-                        <span class="text-[9px] text-primary-600 block">عیار محصول</span>
-                        <span class="text-xs font-bold text-primary-600">۱۸ عیار (۷۵۰)</span>
-                        <!-- در صورت وجود فیلد عیار در مدل، می‌توانید آن را جایگزین کنید -->
+                    
+                    <!-- آیکون ظریف جهت هدایت کاربر -->
+                    <div class="w-7 h-7 rounded-lg bg-surface-50 flex items-center justify-center border border-primary-300/5 text-surface-400 group-hover:text-primary-700 group-hover:bg-primary-50 transition-colors">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
                     </div>
                 </div>
             </div>
         </a>
         {% empty %}
-        <div class="col-span-full text-center py-12 bg-primary-100/50 rounded-3xl border border-dashed border-primary-300">
-            <p class="text-sm text-primary-600">هیچ محصول فعالی در این دسته‌بندی روی ویترین یافت نشد 😐</p>
+        <!-- حالت خالی بودن گالری با اموجی‌های اختصاصی شما 🥲 -->
+        <div class="col-span-full text-center py-16 bg-white/40 backdrop-blur-md rounded-2xl border border-dashed border-primary-300/20">
+            <p class="text-sm font-bold text-surface-500">هیچ محصولی در این دسته‌بندی روی ویترین گالری یافت نشد 🥲🙃</p>
         </div>
         {% endfor %}
 

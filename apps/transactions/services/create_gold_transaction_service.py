@@ -26,7 +26,7 @@ def CreateGoldTransactionService(
         # ۲. بررسی کنترل موجودی در صورت برداشت
         if transaction_type == 'WITHDRAWAL':
             # از آنجا که بالانس بر اساس user_id محاسبه می‌شود، شناسه کاربر متصل به مشتری را می‌فرستیم
-            current_balance = services.GetUserGoldBalance(customer.user_id)
+            current_balance = services.GetUserGoldBalanceService(customer.user_id)
             if current_balance < gold_weight:
                 raise ValidationError(
                     f"موجود‌ی ناکافی است. موجودی فعلی: {current_balance} گرم، "

@@ -7,137 +7,129 @@
 
 {% block page_main %}
     <!-- لینک بازگشت -->
-    <div class="mb-6 text-right">
-        <a href="{% url 'customers:showcase' %}" class="inline-flex items-center gap-2 text-xs font-bold text-primary-600 hover:text-primary-800 transition-colors">
+    <div class="mb-5 text-right">
+        <a href="{% url 'customers:showcase' %}" class="inline-flex items-center gap-2 text-xs font-bold text-primary-500 hover:text-primary-700 transition-colors">
             <span>← بازگشت به ویترین محصولات</span>
         </a>
     </div>
 
     <!-- مسیر راهنما (Breadcrumb) پویا -->
-    <nav class="flex items-center gap-2 text-xs text-primary-600 mb-4" aria-label="مسیر راهنما">
-        <a href="{% url 'customers:customer_dashboard' %}" class="hover:text-primary-800 transition-colors">خانه</a>
+    <nav class="flex items-center gap-2 text-[11px] text-surface-500 mb-6" aria-label="مسیر راهنما">
+        <a href="{% url 'customers:customer_dashboard' %}" class="hover:text-primary-600 transition-colors">خانه</a>
         <span>/</span>
-        <a href="{% url 'customers:showcase' %}" class="hover:text-primary-800 transition-colors">کاتالوگ زیورآلات</a>
+        <a href="{% url 'customers:showcase' %}" class="hover:text-primary-600 transition-colors">کاتالوگ زیورآلات</a>
         <span>/</span>
-        <a href="#" class="hover:text-primary-800 transition-colors">{{ product.category.title }}</a>
+        <a href="#" class="hover:text-primary-600 transition-colors">{{ product.category.title }}</a>
         <span>/</span>
-        <span class="text-primary-800 font-bold">{{ product.title }}</span>
+        <span class="text-surface-900 font-bold">{{ product.title }}</span>
     </nav>
 
-    <!-- بخش اصلی: گالری + اطلاعات -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
+    <!-- بخش اصلی: گالری جمع‌وجور (ستون کوچک‌تر) + اطلاعات کامل (ستون بزرگ‌تر) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
         
-        <!-- ===== ستون راست (گالری تصاویر) ===== -->
-        <div class="space-y-4">
-            <!-- تصویر اصلی با زوم -->
-            <div class="relative rounded-3xl border border-primary-300 bg-primary-200/40 overflow-hidden group">
+        <!-- ===== ستون گالری تصاویر (اختصاص تنها ۴ ستون از ۱۲ ستون در دسکتاپ برای کوچک‌تر شدن) ===== -->
+        <div class="lg:col-span-4 space-y-3 max-w-sm mx-auto lg:max-w-none w-full">
+            <!-- تصویر اصلی مینی‌مال -->
+            <div class="relative rounded-2xl border border-primary-300/10 bg-white shadow-sm overflow-hidden group">
                 <img id="main-product-image" 
                      src="{% if product.image %}{{ product.image.url }}{% else %}https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=600&auto=format&fit=crop{% endif %}" 
                      alt="{{ product.title }}" 
-                     class="w-full h-auto aspect-square object-cover transition-transform duration-700 group-hover:scale-110"
+                     class="w-full h-auto aspect-square object-cover transition-all duration-500 group-hover:scale-105"
                      onerror="this.src='https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=600&auto=format&fit=crop';">
-                <!-- برچسب وضعیت (موجودی) -->
-                <span class="absolute top-4 right-4 z-10 bg-emerald-100 text-emerald-700 border border-emerald-300 text-xs font-bold px-3 py-1.5 rounded-full shadow-md">
+                
+                <!-- برچسب وضعیت موجودی ظریف -->
+                <span class="absolute top-3 right-3 z-10 text-[10px] font-bold px-2.5 py-1 rounded-lg shadow-sm
+                    {% if product.is_available %} bg-success/10 text-success border border-success/20 {% else %} bg-danger/10 text-danger border border-danger/20 {% endif %}">
                     {% if product.is_available %}موجود در گالری{% else %}ناموجود{% endif %}
                 </span>
-                <!-- آیکون بزرگ‌نمایی -->
-                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/10 pointer-events-none">
-                    <svg class="w-12 h-12 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m-3-3h6" />
-                    </svg>
-                </div>
             </div>
 
-            <!-- تصاویر کوچک (Thumbnails) -->
-            <div class="grid grid-cols-4 gap-3">
+            <!-- تصاویر کوچک ظریف (Thumbnails) -->
+            <div class="grid grid-cols-4 gap-2">
                 <!-- تصویر اصلی به‌عنوان اولین بند انگشتی -->
-                <div class="rounded-2xl border-2 border-primary-400 overflow-hidden cursor-pointer hover:border-primary-500 transition-colors" 
+                <div class="rounded-xl border-2 border-primary-500 overflow-hidden cursor-pointer hover:border-primary-600 transition-all p-0.5 bg-white" 
                      onclick="changeMainImage('{% if product.image %}{{ product.image.url }}{% else %}https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=200&auto=format&fit=crop{% endif %}')">
                     <img src="{% if product.image %}{{ product.image.url }}{% else %}https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=200&auto=format&fit=crop{% endif %}" 
-                         alt="تصویر اصلی" class="w-full aspect-square object-cover">
+                         alt="تصویر اصلی" class="w-full aspect-square object-cover rounded-lg">
                 </div>
                 <!-- تصاویر گالری -->
                 {% for gallery in product.images.all %}
-                <div class="rounded-2xl border border-primary-300 overflow-hidden cursor-pointer hover:border-primary-500 transition-colors"
+                <div class="rounded-xl border border-primary-300/10 overflow-hidden cursor-pointer hover:border-primary-500 transition-all p-0.5 bg-white"
                      onclick="changeMainImage('{{ gallery.image.url }}')">
-                    <img src="{{ gallery.image.url }}" alt="تصویر {{ forloop.counter }}" class="w-full aspect-square object-cover">
+                    <img src="{{ gallery.image.url }}" alt="تصویر {{ forloop.counter }}" class="w-full aspect-square object-cover rounded-lg">
                 </div>
                 {% endfor %}
-                <!-- اگر تعداد تصاویر کمتر از ۴ بود، می‌توان جای خالی را با یک placeholder پر کرد -->
-                {% if product.images.all|length == 0 %}
-                    {% for i in "123"|slice:product.images.all|length|add:"1" %}
-                    <!-- در صورت نیاز جای خالی -->
-                    {% endfor %}
-                {% endif %}
             </div>
         </div>
 
-        <!-- ===== ستون چپ (اطلاعات محصول) ===== -->
-        <div class="space-y-5">
-            <!-- هدر محصول -->
-            <div>
-                <div class="flex items-center gap-2 text-xs text-primary-600 mb-1">
-                    <span>کد کالا: {{ product.slug|upper }}</span>
-                    <span class="w-1 h-1 rounded-full bg-primary-400"></span>
-                    <span class="bg-primary-300/30 text-primary-700 px-2 py-0.5 rounded-full">{{ product.category.title }}</span>
+        <!-- ===== ستون اطلاعات محصول (اختصاص ۸ ستون از ۱۲ ستون برای فضای گسترده‌تر) ===== -->
+        <div class="lg:col-span-8 space-y-5">
+            <!-- هدر کالا -->
+            <div class="border-b border-primary-300/10 pb-4">
+                <div class="flex items-center gap-2 text-[10px] font-bold text-surface-500 mb-2">
+                    <span class="tracking-wider">کد کالا: {{ product.slug|upper }}</span>
+                    <span class="w-1 h-1 rounded-full bg-surface-300"></span>
+                    <span class="bg-primary-50 text-primary-600 px-2.5 py-0.5 rounded-md">{{ product.category.title }}</span>
                 </div>
-                <h1 class="text-2xl md:text-3xl font-bold text-primary-800 leading-tight">{{ product.title }}</h1>
+                <h1 class="text-xl md:text-2xl font-black text-surface-900 leading-tight">{{ product.title }}</h1>
             </div>
 
-            <!-- باکس کوچک وزن و عیار -->
-            <div class="flex items-center gap-4 bg-primary-200/40 border border-primary-300/60 rounded-2xl px-4 py-2.5 inline-flex">
+            <!-- باکس کوچک وزن و عیار با تِم جدید تجلا -->
+            <div class="flex items-center gap-4 bg-white border border-primary-300/10 rounded-xl px-4 py-3 inline-flex shadow-sm">
                 <div class="flex items-center gap-2">
-                    <svg class="w-4 h-4 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m2.828-9.9a5 5 0 117.072 0l-.707.707M6.343 6.343l.707.707m9.9 9.9l.707-.707" />
+                    <svg class="w-4 h-4 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
                     </svg>
-                    <span class="text-sm font-bold text-primary-800">{{ product.weight|floatformat:3 }} <span class="text-xs font-normal text-primary-600">گرم</span></span>
+                    <span class="text-xs font-bold text-surface-500">وزن خالص:</span>
+                    <span class="text-sm font-black text-primary-700 tracking-wide font-mono">{{ product.weight|floatformat:3 }} <span class="text-xs font-normal text-surface-400">گرم</span></span>
                 </div>
-                <span class="w-px h-6 bg-primary-300/60"></span>
+                <span class="w-px h-5 bg-primary-300/10"></span>
                 <div class="flex items-center gap-2">
-                    <svg class="w-4 h-4 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="w-4 h-4 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span class="text-sm font-bold text-primary-800">۱۸ عیار (۷۵۰)</span>
+                    <span class="text-xs font-bold text-surface-500">عیار:</span>
+                    <span class="text-sm font-black text-surface-700">۱۸ عیار (۷۵۰)</span>
                 </div>
             </div>
 
-            <!-- توضیحات -->
+            <!-- توضیحات کالا -->
             {% if product.description %}
-            <div class="bg-primary-200/30 border border-primary-300/40 rounded-2xl p-4">
-                <h3 class="text-sm font-bold text-primary-800 mb-2">توضیحات محصول</h3>
-                <p class="text-sm text-primary-700 leading-relaxed">{{ product.description }}</p>
+            <div class="bg-white/60 backdrop-blur-md border border-primary-300/10 rounded-xl p-4 shadow-sm">
+                <h3 class="text-xs font-black text-surface-800 mb-2">توضیحات و ویژگی‌ها</h3>
+                <p class="text-xs text-surface-600 leading-relaxed">{{ product.description }}</p>
             </div>
             {% endif %}
 
-            <!-- جدول مشخصات فنی (برگرفته از فایل دوم) -->
-            <div class="border border-primary-300 rounded-3xl overflow-hidden shadow-sm bg-gradient-to-b from-primary-50 to-primary-100/50">
-                <div class="bg-primary-800 text-white px-4 py-3 font-bold text-sm">
-                    مشخصات فنی و ارزش مسکوکات/زیورآلات
+            <!-- جدول مشخصات فنی لوکس هماهنگ با هویت بصری -->
+            <div class="border border-primary-300/10 rounded-xl overflow-hidden shadow-sm bg-white">
+                <div class="bg-primary-900 text-secondary-400 px-4 py-3 font-black text-xs">
+                    مشخصات فنی و اصالت مسکوکات/زیورآلات
                 </div>
-                <div class="divide-y divide-primary-200/60">
-                    <div class="flex justify-between items-center px-4 py-3.5 text-sm">
-                        <span class="text-primary-600">وزن خالص طلا</span>
-                        <span class="font-black text-primary-900 tracking-wide">{{ product.weight|floatformat:3 }} <span class="text-xs font-normal text-primary-600">گرم</span></span>
+                <div class="divide-y divide-primary-300/10">
+                    <div class="flex justify-between items-center px-4 py-3 text-xs">
+                        <span class="text-surface-500 font-bold">وزن دقیق استاندارد</span>
+                        <span class="font-black text-surface-900 tracking-wide font-mono">{{ product.weight|floatformat:3 }} <span class="text-[10px] font-normal text-surface-400">گرم</span></span>
                     </div>
-                    <div class="flex justify-between items-center px-4 py-3.5 text-sm">
-                        <span class="text-primary-600">عیار استاندارد ملی</span>
-                        <span class="font-bold text-primary-900">۱۸ عیار (۷۵۰)</span>
+                    <div class="flex justify-between items-center px-4 py-3 text-xs">
+                        <span class="text-surface-500 font-bold">عیار رسمی استاندارد ملی</span>
+                        <span class="font-black text-surface-900">۱۸ عیار (۷۵۰)</span>
                     </div>
-                    <div class="flex justify-between items-center px-4 py-3.5 text-sm">
-                        <span class="text-primary-600">تاریخ آخرین به‌روزرسانی ویترین</span>
-                        <span class="text-xs font-medium text-primary-700">{{ product.updated_at|date:"Y/m/d" }}</span>
+                    <div class="flex justify-between items-center px-4 py-3 text-xs">
+                        <span class="text-surface-500 font-bold">آخرین به‌روزرسانی در ویترین</span>
+                        <span class="text-[11px] font-bold text-surface-600 font-mono">{{ product.updated_at|date:"Y/m/d" }}</span>
                     </div>
                 </div>
             </div>
 
-            <!-- دکمه‌های اقدام (به‌روز شده) -->
+            <!-- دکمه‌های عملیاتی اَکشن کاملاً منطبق با پالت رنگی تعبیه‌شده -->
             <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                <a href="#" class="flex-1 bg-secondary-500 hover:bg-secondary-600 border border-secondary-600 text-secondary-950 font-bold text-sm text-center py-3.5 rounded-2xl shadow-lg transition-all duration-300 hover:-translate-y-0.5">
-                    ثبت سفارش
+                <a href="#" class="flex-1 bg-secondary-500 hover:bg-secondary-600 border border-secondary-600 text-secondary-950 font-black text-xs text-center py-3.5 rounded-xl shadow-md transition-all duration-300 hover:-translate-y-0.5">
+                    ثبت سفارش ساخت/خرید
                 </a>
                 
                 <button id="goal-btn" onclick="toggleGoal('{{ product.slug }}')" 
-                        class="{% if is_targeted %}bg-secondary-500 text-secondary-950 border-secondary-600{% else %}bg-primary-200/60 text-primary-800 border-primary-300{% endif %} border font-bold text-sm px-6 py-3.5 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer">
+                        class="{% if is_targeted %}bg-warning text-white border-warning{% else %}bg-surface-50 text-surface-700 border-primary-300/10{% endif %} border font-bold text-xs px-5 py-3.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer hover:bg-surface-100">
                     <svg id="goal-icon" class="w-4 h-4 text-primary-600 transition-colors" 
                         fill="{% if is_targeted %}currentColor{% else %}none{% endif %}" 
                         viewBox="0 0 24 24" stroke="currentColor">
@@ -150,7 +142,7 @@
     </div>
 
     <!-- اسکریپت تغییر تصویر اصلی -->
-<script>
+    <script>
         function changeMainImage(imageUrl) {
             const mainImg = document.getElementById('main-product-image');
             mainImg.style.opacity = '0';
@@ -161,14 +153,12 @@
         }
 
         function toggleGoal(slug) {
-            // ۱. تست اولیه: آیا کلیک روی دکمه کار میکند؟
             console.log("تابع برای اسلاگ اجرا شد: ", slug);
             
             const btn = document.getElementById('goal-btn');
             const text = document.getElementById('goal-text');
             const icon = document.getElementById('goal-icon');
             
-            // آدرس‌دهی دقیق بر اساس ساختار روت‌های پروژه شما (همراه با پیشوند نِیم‌اسپیس)
             const targetUrl = `/customers/product/${slug}/toggle-goal/`;
             
             fetch(targetUrl, {
@@ -179,39 +169,30 @@
                 }
             })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error("پاسخ سرور نامعتبر بود! وضعیت کُد: " + response.status);
-                }
+                if (!response.ok) throw new Error("پاسخ سرور نامعتبر بود!");
                 return response.json();
             })
             .then(data => {
                 if (data.status === 'success') {
                     if (data.is_added) {
-                        // نمایش آلرت موفقیت آمیز خرید هدف
                         alert("🎯 محصول با موفقیت به اهداف خرید شما در داشبورد اضافه شد!");
-                        
-                        // تغییر رنگ مستقیم استایل دکمه به طلایی/amber
-                        btn.style.backgroundColor = "#f59e0b"; 
-                        btn.style.color = "#000000";
+                        btn.style.backgroundColor = "#f59e0b"; // بر اساس وارنینگ تولکیت رنگی شما
+                        btn.style.color = "#ffffff";
                         icon.setAttribute('fill', 'currentColor');
                         text.innerText = 'هدف قرار داده شد';
                     } else {
-                        // نمایش آلرت حذف
                         alert("❌ محصول از لیست اهداف خرید شما حذف شد.");
-                        
-                        // بازگرداندن رنگ به حالت اولیه خنثی
-                        btn.style.backgroundColor = "rgba(209, 213, 219, 0.4)"; 
-                        btn.style.color = "#1f2937";
+                        btn.style.backgroundColor = "#f4f6f5"; // رنگ سرفیس ۵۰ شما
+                        btn.style.color = "#495951";
                         icon.setAttribute('fill', 'none');
                         text.innerText = 'نشان بعنوان هدف';
                     }
                 } else {
-                    alert("خطایی از سمت دیتابیس گزارش شد: " + data.message);
+                    alert("خطایی گزارش شد: " + data.message);
                 }
             })
             .catch(err => {
-                // اگر روت اشتباه باشد یا ارور ۵۰۰ رخ دهد، اینجا به شما آلرت می‌دهد چی خراب است
-                alert("🚨 خطا در ارسال درخواست ایجکس!\nلطفاً کنسول مرورگر (F12) را چک کنید.\nپیام خطا: " + err.message);
+                alert("🚨 خطا در ارسال درخواست ایجکس!");
                 console.error(err);
             });
         }

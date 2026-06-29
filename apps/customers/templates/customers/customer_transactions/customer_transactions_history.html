@@ -1,0 +1,136 @@
+{% extends 'core/base_customer.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block page_title %}تاریخچه تراکنش‌ها | تجلا گلد{% endblock %}
+
+{% block header_title %}گزارش سوابق حساب طلا{% endblock %}
+
+{% block page_main %}
+    <!-- گرید اصلی: بخش فیلترها/خلاصه و لیست تراکنش‌ها -->
+    <div class="space-y-6">
+        
+        <!-- کارت هدر و بیانیه شفافیت (شبیه به استایل کارت دارایی داشبورد) -->
+        <div class="rounded-3xl border border-primary-300 bg-gradient-to-br from-primary-100/90 via-primary-200/70 to-primary-200/40 backdrop-blur-xl p-6 md:p-8 shadow-xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-80 h-80 bg-[radial-gradient(circle_at_top_right,rgba(52,98,85,0.08),transparent_50%)] pointer-events-none"></div>
+            
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div class="space-y-1 text-right">
+                    <span class="bg-primary-300/30 text-primary-700 border border-primary-400/30 px-3 py-1 rounded-full text-xs font-semibold inline-block">گزارش رسمی</span>
+                    <h3 class="text-lg md:text-xl font-bold text-primary-800 pt-2">ریز تراکنش‌های صندوق امانات</h3>
+                    <p class="text-primary-600 text-xs">تاریخچه دقیق تمام واریزها، برداشت‌ها و اسناد طلای ثبت شده به نام شما</p>
+                </div>
+                <!-- وضعیت حساب -->
+                <div class="bg-white/40 border border-primary-300/60 px-4 py-2 rounded-2xl text-xs font-bold text-primary-800 backdrop-blur-sm">
+                    🟢 وضعیت حساب: کاملاً تاییدشده
+                </div>
+            </div>
+        </div>
+
+        <!-- لیست تراکنش‌ها به صورت کارت‌های اختصاصی و مدرن -->
+        <div class="space-y-4">
+            {% for tx in transactions %}
+                <div class="rounded-3xl border border-primary-300/70 bg-white/50 backdrop-blur-md p-5 md:p-6 shadow-md transition-all hover:border-primary-400/60 flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative overflow-hidden">
+                    
+                    <!-- نوار رنگی وضعیت در لبه کارت -->
+                    <div class="absolute top-0 bottom-0 right-0 w-2 {% if tx.transaction_type == 'DEPOSIT' %}bg-success{% else %}bg-danger{% endif %}"></div>
+                    
+                    <!-- ستون راست: اطلاعات نوع تراکنش و زمان -->
+                    <div class="flex items-center gap-4 text-right pr-2">
+                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-inner
+                            {% if tx.transaction_type == 'DEPOSIT' %}bg-success/10 text-success border border-success/20{% else %}bg-danger/10 text-danger border border-danger/20{% endif %}">
+                            {% if tx.transaction_type == 'DEPOSIT' %}
+                                <!-- آیکون واریز/ورود طلا -->
+                                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 13l-7 7-7-7m14-6l-7 7-7-7" />
+                                </svg>
+                            {% else %}
+                                <!-- آیکون برداشت/خروج طلا -->
+                                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 11l7-7 7 7M5 19l7-7 7 7" />
+                                </svg>
+                            {% endif %}
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2">
+                                <h4 class="text-base font-bold text-primary-900">
+                                    {% if tx.transaction_type == 'DEPOSIT' %}واریز به صندوق امانی{% else %}برداشت از صندوق امانی{% endif %}
+                                </h4>
+                                <span class="text-[10px] font-mono bg-surface-100 border border-surface-200 text-surface-600 px-1.5 py-0.5 rounded-md">
+                                    کد #{{ tx.id }}
+                                </span>
+                            </div>
+                            <p class="text-xs text-surface-500 font-mono">{{ tx.created_at|date:"Y/m/d - H:i" }}</p>
+                        </div>
+                    </div>
+
+                    <!-- ستون وسط: مقادیر عددی (وزن و قیمت گرمی) -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 lg:gap-8 border-t lg:border-t-0 lg:border-r border-primary-300/40 pt-4 lg:pt-0 lg:pr-8 flex-1">
+                        <!-- وزن طلا -->
+                        <div class="text-right">
+                            <span class="text-[11px] text-primary-600 block mb-0.5">وزن طلا:</span>
+                            <div class="text-lg font-black tracking-tight font-mono {% if tx.transaction_type == 'DEPOSIT' %}text-success{% else %}text-danger{% endif %}">
+                                {% if tx.transaction_type == 'DEPOSIT' %}+{% else %}-{% endif %}{{ tx.gold_weight|floatformat:3 }}
+                                <span class="text-xs font-bold mr-0.5">گرم</span>
+                            </div>
+                        </div>
+                        
+                        <!-- مبنای قیمت هر گرم -->
+                        <div class="text-right">
+                            <span class="text-[11px] text-primary-600 block mb-0.5">نرخ هر گرم (عیار ۱۸):</span>
+                            <div class="text-base font-bold text-primary-800 font-mono">
+                                {{ tx.gold_price_per_gram|intcomma }}
+                                <span class="text-[10px] font-normal text-primary-500 mr-0.5">ریال</span>
+                            </div>
+                        </div>
+
+                        <!-- ارزش کل فاکتور -->
+                        <div class="text-right col-span-2 sm:col-span-1">
+                            <span class="text-[11px] text-primary-600 block mb-0.5">ارزش کل مبادله:</span>
+                            <div class="text-base font-black text-primary-900 font-mono">
+                                {{ tx.total_cal_price|intcomma }}
+                                <span class="text-[10px] font-normal text-primary-500 mr-0.5">ریال</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ستون چپ: توضیحات ثبت شده -->
+                    <div class="border-t lg:border-t-0 lg:border-r border-primary-300/40 pt-4 lg:pt-0 lg:pr-6 lg:min-w-[180px] lg:max-w-[240px] text-right">
+                        <span class="text-[11px] text-primary-600 block mb-1">بابت / توضیحات مدیریت:</span>
+                        <p class="text-xs text-surface-700 leading-relaxed font-medium bg-white/40 border border-primary-300/30 p-2 rounded-xl">
+                            {{ tx.description|default:"توضیحاتی برای این تراکنش درج نشده است." }}
+                        </p>
+                    </div>
+
+                </div>
+            {% empty %}
+                <!-- حالت خالی بودن تراکنش‌ها -->
+                <div class="rounded-3xl border border-primary-300/60 bg-white/40 backdrop-blur-md p-12 text-center space-y-3">
+                    <div class="w-16 h-16 rounded-2xl bg-primary-100 border border-primary-200 flex items-center justify-center mx-auto text-2xl">
+                        🙃
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-sm font-bold text-primary-800">هنوز هیچ تراکنشی ثبت نشده است</h4>
+                        <p class="text-xs text-primary-600">پس از اولین واریز یا برداشت طلای امانی، ریز فاکتورهای شما در این صفحه قرار می‌گیرد.</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- باکس راهنما و ضوابط نوسان (یکپارچه با کارت سلب مسئولیت داشبورد) -->
+        <div class="rounded-3xl border border-amber-500/20 bg-amber-500/5 p-6 md:p-8 shadow-md">
+            <div class="space-y-2 text-right">
+                <div class="flex items-center gap-2.5 text-amber-600">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <span class="font-bold text-sm text-amber-700">توجه حقوقی و ایمنی کاربران</span>
+                </div>
+                <p class="text-primary-600 text-xs leading-relaxed">
+                    موجود‌ی‌ها بر اساس فاکتورهای رسمی فوق به صورت لحظه‌ای بروزرسانی می‌شوند[cite: 6]. در صورت بروز هرگونه مغایرت در تعداد گرم یا مقادیر عددی فاکتورها، خواهشمند است حداکثر ظرف مدت ۴۸ ساعت مدارک خود را به صورت حضوری به گالری تجلا ارائه نمایید تا بررسی لاگ‌های امنیتی سیستم در دستور کار قرار گیرد.
+                </p>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

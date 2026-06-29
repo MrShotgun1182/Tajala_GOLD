@@ -2,3 +2,4 @@ from .customer_dashboard_view import CustomerDashboardView
 from .customer_product.customer_showcase_view import CustomerShowcaseView
 from .customer_product.customer_product_detail_view import ProductDetailView 
 from .customer_product.toggle_goal_view import ToggleGoalView
+from .customer_transactions.customer_transactions_history_view import CustomerTransactionsHistoryView
