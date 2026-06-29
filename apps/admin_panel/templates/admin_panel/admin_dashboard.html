@@ -8,20 +8,20 @@
 {% block admin_content %}
 
 <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
-    <div class="flex items-center gap-2 rtl:space-x-reverse">
-        <button type="button" class="flex items-center gap-1.5 px-3 py-2 bg-surface-100 border border-primary-300/20 text-primary-700 rounded-xl hover:bg-surface-200/70 transition-all duration-200 group text-xs font-bold shadow-sm whitespace-nowrap">
-            <svg class="w-4 h-4 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-            </svg>
-            ماشین‌حساب
-        </button>
-        <button type="button" class="flex items-center gap-1.5 px-3 py-2 bg-primary-700 hover:bg-primary-800 text-secondary-400 rounded-xl shadow-md shadow-primary-700/15 transition-all duration-200 group text-xs font-bold whitespace-nowrap">
-            <svg class="w-4 h-4 text-secondary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-            تراکنش جدید
-        </button>
-    </div>
+<div class="flex items-center gap-2 rtl:space-x-reverse">
+    <a href="#" class="flex items-center gap-1.5 px-3 py-2 bg-surface-100 border border-primary-300/20 text-primary-700 rounded-xl hover:bg-surface-200/70 transition-all duration-200 group text-xs font-bold shadow-sm whitespace-nowrap no-underline">
+        <svg class="w-4 h-4 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+        </svg>
+        ماشین‌حساب
+    </a>
+    <a href="{% url 'admin_panel:create_gold_transaction' %}" class="flex items-center gap-1.5 px-3 py-2 bg-primary-700 hover:bg-primary-800 text-secondary-400 rounded-xl shadow-md shadow-primary-700/15 transition-all duration-200 group text-xs font-bold whitespace-nowrap no-underline">
+        <svg class="w-4 h-4 text-secondary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        </svg>
+        تراکنش جدید
+    </a>
+</div>
 </div>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6">

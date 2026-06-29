@@ -13,7 +13,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-primary-300/10 pb-4">
         <div>
             <h3 class="text-base font-black text-primary-700">کاتالوگ آنلاین محصولات طلا</h3>
-            <p class="text-[11px] text-primary-600/60 mt-0.5">افزودن، ویرایش، حذف و پایش وضعیت موجودی زیورآلات گالری</p>
+            <p class="text-[11px] text-primary-600/60 mt-0.5">افزودن، ویرایش و پایش وضعیت موجودی زیورآلات گالری</p>
         </div>
         <div class="flex gap-2.5">
             <a href="{% url 'admin_panel:create_product' %}" class="inline-flex items-center justify-center gap-1.5 bg-primary-700 hover:bg-primary-800 text-secondary-400 font-black text-xs px-4 py-2.5 rounded-xl shadow-md shadow-primary-700/10 transition-all">
@@ -39,8 +39,8 @@
         </div>
     {% endif %}
 
-    <!-- کارت‌های آمار و اطلاعات ویترین کاتالوگ -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+    <!-- کارت‌های آمار و اطلاعات ویترین کاتالوگ (۲ کارته) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
         
         <!-- کارت تعداد کل محصولات -->
         <div class="rounded-2xl border border-primary-300/10 bg-surface-100 p-5 flex items-center justify-between shadow-sm hover:shadow-md transition-all">
@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <!-- کارت دسته‌ب بندی‌ها -->
+        <!-- کارت دسته‌بندی‌ها -->
         <div class="rounded-2xl border border-primary-300/10 bg-surface-100 p-5 flex items-center justify-between shadow-sm hover:shadow-md transition-all">
             <div class="space-y-1">
                 <span class="text-xs text-primary-600/60 font-medium block">دسته‌بندی‌های فعال</span>
@@ -64,23 +64,6 @@
             <div class="w-11 h-11 rounded-xl bg-white border border-primary-300/10 flex items-center justify-center text-primary-600/60 shadow-inner">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2-0 01-2-2V6z" />
-                </svg>
-            </div>
-        </div>
-
-        <!-- کارت پرفروش‌ترین -->
-        <div class="rounded-2xl border border-success/20 bg-success/5 p-5 flex items-center justify-between shadow-sm hover:shadow-md transition-all">
-            <div class="space-y-1">
-                <span class="text-xs text-success/80 font-medium block">پرفروش‌ترین ماه اخیر</span>
-                {% if best_selling_product %}
-                    <span class="text-success font-bold text-base block mt-1">{{ best_selling_product.title }}</span>
-                {% else %}
-                    <span class="text-success font-bold text-sm block mt-1">—</span>
-                {% endif %}
-            </div>
-            <div class="w-11 h-11 rounded-xl bg-success/10 border border-success/20 flex items-center justify-center text-success shadow-inner">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                 </svg>
             </div>
         </div>
@@ -105,47 +88,49 @@
         </form>
     </div>
 
-    <!-- گرید کارت‌های محصولات ویترین -->
+    <!-- گرید کارت‌های محصولات ویترین (کوچک‌تر) -->
     {% if products %}
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {% for product in products %}
-                <div class="rounded-2xl border border-primary-300/10 bg-white overflow-hidden flex flex-col justify-between shadow-sm group hover:border-primary-300/30 hover:shadow-md transition-all">
-                    <div class="p-4 space-y-3 relative">
-                        <div class="w-full h-44 rounded-xl bg-surface-50 border border-primary-300/5 flex items-center justify-center relative overflow-hidden shadow-inner">
+                <div class="rounded-xl border border-primary-300/10 bg-white overflow-hidden flex flex-col justify-between shadow-sm group hover:border-primary-300/30 hover:shadow-md transition-all">
+                    <div class="p-3 space-y-2 relative">
+                        <!-- تصویر محصول کوچک‌تر -->
+                        <div class="w-full h-36 rounded-lg bg-surface-50 border border-primary-300/5 flex items-center justify-center relative overflow-hidden shadow-inner">
                             {% if product.image %}
                                 <img src="{{ product.image.url }}" alt="{{ product.title }}" class="w-full h-full object-cover">
                             {% else %}
-                                <svg class="w-12 h-12 text-primary-300 group-hover:text-secondary-500/40 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg class="w-10 h-10 text-primary-300 group-hover:text-secondary-500/40 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
                             {% endif %}
-                            <span class="absolute top-2 right-2 bg-white/90 backdrop-blur-sm border border-primary-300/20 text-[10px] text-secondary-700 px-2 py-0.5 rounded-md font-bold font-mono">{{ product.sku|default:"---" }}</span>
+                            <span class="absolute top-1.5 right-1.5 bg-white/90 backdrop-blur-sm border border-primary-300/20 text-[9px] text-secondary-700 px-1.5 py-0.5 rounded-md font-bold font-mono">{{ product.sku|default:"---" }}</span>
                         </div>
                         
+                        <!-- اطلاعات محصول فشرده‌تر -->
                         <div>
                             <div class="flex items-center justify-between">
-                                <h4 class="font-bold text-primary-800 text-sm group-hover:text-secondary-600 transition-colors">{{ product.title }}</h4>
-                                <span class="text-[10px] bg-surface-100 text-primary-700 px-2 py-0.5 rounded-full font-medium">{{ product.category.title|default:"بدون دسته" }}</span>
+                                <h4 class="font-bold text-primary-800 text-xs group-hover:text-secondary-600 transition-colors">{{ product.title|truncatechars:20 }}</h4>
+                                <span class="text-[9px] bg-surface-100 text-primary-700 px-1.5 py-0.5 rounded-full font-medium">{{ product.category.title|default:"بدون دسته"|truncatechars:10 }}</span>
                             </div>
-                            <div class="flex items-center gap-4 mt-2 border-t border-primary-300/5 pt-2 text-xs">
+                            <div class="flex items-center gap-3 mt-1.5 border-t border-primary-300/5 pt-1.5 text-[10px]">
                                 <div class="flex flex-col">
-                                    <span class="text-[10px] text-primary-600/60 font-medium">وزن دقیق طلا</span>
-                                    <span class="font-mono font-black text-primary-800 mt-0.5">{{ product.weight|floatformat:3 }} <span class="text-[9px] font-normal text-primary-600/50">گرم</span></span>
+                                    <span class="text-[8px] text-primary-600/60 font-medium">وزن طلا</span>
+                                    <span class="font-mono font-black text-primary-800 text-xs">{{ product.weight|floatformat:3 }} <span class="text-[8px] font-normal text-primary-600/50">گرم</span></span>
                                 </div>
                                 <div class="flex flex-col">
-                                    <span class="text-[10px] text-primary-600/60 font-medium">اجرت و کارمزد</span>
-                                    <span class="font-mono font-bold text-secondary-600 mt-0.5">{{ product.commission_percent|default:"۰" }}٪</span>
+                                    <span class="text-[8px] text-primary-600/60 font-medium">اجرت</span>
+                                    <span class="font-mono font-bold text-secondary-600 text-xs">{{ product.commission_percent|default:"۰" }}٪</span>
                                 </div>
                             </div>
                             {% if product.description %}
-                                <p class="text-xs text-primary-600/80 mt-2 line-clamp-2">{{ product.description|truncatewords:10 }}</p>
+                                <p class="text-[10px] text-primary-600/80 mt-1 line-clamp-1">{{ product.description|truncatewords:5 }}</p>
                             {% endif %}
                         </div>
                     </div>
                     
-                    <div class="bg-surface-50 border-t border-primary-300/10 p-3 grid grid-cols-2 gap-2">
-                        <a href="#" class="bg-white border border-primary-300/20 text-primary-700 hover:text-primary-900 hover:bg-surface-100 text-center py-1.5 rounded-xl text-xs font-bold transition-all">ویرایش مشخصات</a>
-                        <a href="#" class="bg-danger/10 text-danger hover:bg-danger hover:text-white border border-danger/20 text-center py-1.5 rounded-xl text-xs font-bold transition-all">حذف از ویترین</a>
+                    <!-- دکمه‌های اکشن (فقط ویرایش) -->
+                    <div class="bg-surface-50 border-t border-primary-300/10 p-2">
+                        <a href="#" class="block bg-white border border-primary-300/20 text-primary-700 hover:text-primary-900 hover:bg-surface-100 text-center py-1.5 rounded-lg text-xs font-bold transition-all">ویرایش مشخصات</a>
                     </div>
                 </div>
             {% endfor %}
