@@ -7,8 +7,8 @@ from accounts.services import AuthenticateUserService
 def LoginView(request):
     if request.user.is_authenticated:
         if request.user.role == 'admin':
-            return redirect('admin_dashboard')
-        return redirect('customer_panel')
+            return redirect('admin_panel:admin_dashboard')
+        return redirect('customers:customer_panel')
 
     form = LoginForm(request.POST or None)
 

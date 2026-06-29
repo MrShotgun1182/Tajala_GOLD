@@ -4,60 +4,67 @@
 {% block title %}{% block page_title %}تجلا گلد | پنل کاربری{% endblock %}{% endblock %}
 
 {% block content %}
-<div class="min-h-dvh bg-primary-100 text-primary-800 relative overflow-hidden flex flex-col md:flex-row pb-24 md:pb-0 overflow-x-hidden">
-    <!-- پس‌زمینه‌های لوکس با گرادیان سبز -->
-    <div class="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] bg-primary-300/10 rounded-full blur-[140px] pointer-events-none"></div>
-    <div class="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] bg-primary-400/10 rounded-full blur-[140px] pointer-events-none"></div>
+<div class="min-h-dvh bg-surface-50 text-surface-900 relative overflow-hidden flex flex-col md:flex-row pb-24 md:pb-0 overflow-x-hidden font-sans antialiased selection:bg-secondary-300/30">
+    <!-- هاله‌های نوری مینیمال و ارگانیک پس‌زمینه با تم زیتونی و بژ مات -->
+    <div class="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] bg-primary-700/5 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] bg-secondary-400/5 rounded-full blur-[140px] pointer-events-none"></div>
 
-    <!-- ===== سایدبار دسکتاپ (استیکی) ===== -->
-    <aside class="hidden md:flex w-72 bg-primary-200/80 backdrop-blur-xl border-l border-primary-300/60 p-6 flex-col justify-between z-20 shrink-0 h-screen sticky top-0">
+    <!-- ===== سایدبار دسکتاپ (ثابت و پایدار در لایه پایه) ===== -->
+    <aside class="hidden md:flex w-72 bg-surface-50/80 backdrop-blur-xl border-l border-primary-300/20 p-6 flex-col justify-between z-20 shrink-0 h-screen sticky top-0 shadow-sm">
         <div class="space-y-8">
-            <!-- لوگو -->
-            <div class="flex items-center gap-3 border-b border-primary-300/80 pb-6">
-                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-primary-300 to-primary-600 flex items-center justify-center shadow-lg shadow-primary-500/20">
-                    <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <!-- لوگو و برندینگ لوکس تجلا گلد -->
+            <div class="flex items-center gap-3 border-b border-primary-300/10 pb-6">
+                <div class="w-11 h-11 rounded-xl bg-primary-700 flex items-center justify-center shadow-md shadow-primary-700/10">
+                    <svg class="w-6 h-6 text-secondary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m2.828-9.9a5 5 0 117.072 0l-.707.707M6.343 6.343l.707.707m9.9 9.9l.707-.707" />
                     </svg>
                 </div>
                 <div class="text-right">
-                    <span class="text-2xl font-black text-secondary-600 tracking-tight block">تجلا گلد</span>
-                    <span class="text-[11px] text-primary-600 block -mt-1">سامانه آنلاین پایش طلا</span>
+                    <span class="text-2xl font-black text-primary-700 tracking-tight block">تجلا گلد</span>
+                    <span class="text-[11px] text-primary-600/60 block -mt-1">سامانه آنلاین پایش طلا</span>
                 </div>
             </div>
 
-            <!-- منوهای اصلی با انیمیشن خط طلایی -->
+            <!-- منوهای اصلی پنل مشتری با ساختار ارث‌بری لایه ناوبری -->
             <nav class="space-y-2">
-                <a href="#" class="relative flex items-center gap-3 text-primary-700 hover:text-secondary-600 px-4 py-3 rounded-xl transition-all group overflow-hidden">
-                    <svg class="w-5 h-5 text-primary-600 group-hover:text-secondary-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {% block user_nav %}
+                <!-- لینک پیشخوان اصلی -->
+                <a href="#" class="relative flex items-center gap-3 text-primary-700/80 hover:text-primary-800 px-4 py-3 rounded-xl transition-all group overflow-hidden">
+                    <svg class="w-5 h-5 text-primary-600/50 group-hover:text-primary-700 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                     </svg>
-                    <span class="text-sm relative z-10">داشبورد اصلی</span>
-                    <span class="absolute bottom-0 right-0 w-0 h-0.5 bg-secondary-500 transition-all duration-500 group-hover:w-full"></span>
+                    <span class="text-sm font-bold relative z-10">داشبورد اصلی</span>
+                    <span class="absolute bottom-0 right-0 w-0 h-0.5 bg-primary-700 transition-all duration-500 group-hover:w-full"></span>
                 </a>
-                <a href="#" class="relative flex items-center gap-3 text-primary-700 hover:text-secondary-600 px-4 py-3 rounded-xl transition-all group overflow-hidden">
-                    <svg class="w-5 h-5 text-primary-600 group-hover:text-secondary-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                
+                <!-- لینک تاریخچه تراکنش‌ها -->
+                <a href="#" class="relative flex items-center gap-3 text-primary-700/80 hover:text-primary-800 px-4 py-3 rounded-xl transition-all group overflow-hidden">
+                    <svg class="w-5 h-5 text-primary-600/50 group-hover:text-primary-700 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                     </svg>
-                    <span class="text-sm relative z-10">تاریخچه تراکنش‌ها</span>
-                    <span class="absolute bottom-0 right-0 w-0 h-0.5 bg-secondary-500 transition-all duration-500 group-hover:w-full"></span>
+                    <span class="text-sm font-bold relative z-10">تاریخچه تراکنش‌ها</span>
+                    <span class="absolute bottom-0 right-0 w-0 h-0.5 bg-primary-700 transition-all duration-500 group-hover:w-full"></span>
                 </a>
-                <a href="#" class="relative flex items-center gap-3 bg-primary-500 text-white font-bold px-4 py-3 rounded-xl transition-all shadow-lg shadow-primary-500/20 group overflow-hidden">
-                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                
+                <!-- لینک ویترین و کاتالوگ زیورآلات -->
+                <a href="#" class="relative flex items-center gap-3 text-primary-700/80 hover:text-primary-800 px-4 py-3 rounded-xl transition-all group overflow-hidden">
+                    <svg class="w-5 h-5 text-primary-600/50 group-hover:text-primary-700 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    <span class="text-sm relative z-10">{% block sidebar_active_label %}کاتالوگ زیورآلات{% endblock %}</span>
-                    <span class="absolute bottom-0 right-0 w-0 h-0.5 bg-white/60 transition-all duration-500 group-hover:w-full"></span>
+                    <span class="text-sm font-bold relative z-10">{% block sidebar_active_label %}کاتالوگ زیورآلات{% endblock %}</span>
+                    <span class="absolute bottom-0 right-0 w-0 h-0.5 bg-primary-700 transition-all duration-500 group-hover:w-full"></span>
                 </a>
+                {% endblock %}
             </nav>
         </div>
 
-        <!-- پایین سایدبار -->
-        <div class="border-t border-primary-300/80 pt-4 mt-6 flex items-center justify-between">
+        <!-- بخش پایین سایدبار دسکتاپ -->
+        <div class="border-t border-primary-300/10 pt-4 mt-6 flex items-center justify-between">
             <div class="text-right">
-                <span class="text-sm font-bold block text-primary-800">کاربر گرامی</span>
-                <span class="text-[10px] text-primary-600 block">سطح دسترسی: مشتری</span>
+                <span class="text-sm font-black block text-primary-700">کاربر گرامی</span>
+                <span class="text-[10px] text-primary-600/50 block font-bold">سطح دسترسی: مشتری</span>
             </div>
-            <a href="#" class="text-rose-500 hover:text-rose-700 p-2 rounded-xl hover:bg-rose-500/10 transition-all" title="خروج">
+            <a href="#" class="text-rose-600 hover:text-rose-700 p-2 rounded-xl hover:bg-rose-50 transition-all" title="خروج">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                 </svg>
@@ -65,62 +72,63 @@
         </div>
     </aside>
 
-    <!-- ===== بخش اصلی (با هدر استیکی در موبایل و دسکتاپ) ===== -->
+    <!-- ===== بخش محتوای اصلی و فریم تاپ‌بار ===== -->
     <div class="flex-1 flex flex-col min-w-0 z-10 h-dvh overflow-hidden">
-        <!-- هدر تاپ‌بار (استیکی در همه اندازه‌ها) -->
-        <header class="w-full border-b border-primary-300/60 bg-primary-200/80 backdrop-blur-md h-16 md:h-20 px-3 sm:px-4 md:px-8 flex items-center justify-between shrink-0 sticky top-0 z-50">
+        <!-- هدر تاپ‌بار با پس‌زمینه استخوانی نیمه‌شفاف و ساختار مرز مات -->
+        <header class="w-full border-b border-primary-300/10 bg-surface-50/80 backdrop-blur-md h-16 md:h-20 px-3 sm:px-4 md:px-8 flex items-center justify-between shrink-0 sticky top-0 z-50 shadow-sm">
             <!-- لوگوی موبایل -->
             <div class="flex items-center gap-2 md:hidden">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-300 to-primary-600 flex items-center justify-center">
-                    <span class="text-white text-xs font-black">T</span>
+                <div class="w-8 h-8 rounded-lg bg-primary-700 flex items-center justify-center">
+                    <span class="text-secondary-400 text-xs font-black">T</span>
                 </div>
-                <span class="text-sm font-black text-secondary-600 tracking-tight">تجلا گلد</span>
+                <span class="text-sm font-black text-primary-700 tracking-tight">تجلا گلد</span>
             </div>
 
             <!-- عنوان صفحه (فقط دسکتاپ) -->
             <div class="text-right hidden md:block">
-                <h2 class="text-base font-bold text-primary-800">{% block header_title %}پنل کاربری{% endblock %}</h2>
+                <h2 class="text-base font-black text-primary-700">{% block header_title %}پیشخوان پنل کاربری{% endblock %}</h2>
             </div>
 
-            <!-- باکس‌های اطلاعات طلا -->
+            <!-- باکس‌های پایش اطلاعات مالی طلا -->
             <div class="flex items-center gap-1 sm:gap-3">
-                <!-- ====== نمای موبایل: کارت ترکیبی ====== -->
-                <div class="flex md:hidden bg-primary-200/80 border border-primary-300/80 rounded-2xl px-2 py-1 shadow-inner divide-x divide-primary-300/60">
+                <!-- ====== نمای موبایل: کارت ترکیبی و ارگانیک بژ ====== -->
+                <div class="flex md:hidden bg-surface-100/70 border border-primary-300/10 rounded-2xl px-2 py-1 shadow-inner divide-x divide-primary-300/10">
                     <!-- بخش موجودی -->
                     <div class="flex flex-col text-right px-2 leading-tight">
-                        <span class="text-[8px] text-primary-700 font-medium">موجودی</span>
+                        <span class="text-[8px] text-primary-600/60 font-bold">موجودی</span>
                         <div class="flex items-baseline gap-0.5">
-                            <span class="text-primary-800 font-black text-xs tracking-wide">۲۴.۷۵۰</span>
-                            <span class="text-[8px] text-primary-600">گرم</span>
+                            <span class="text-primary-700 font-black text-xs tracking-wide">۲۴.۷۵۰</span>
+                            <span class="text-[8px] text-primary-600/50 font-medium">گرم</span>
                         </div>
                     </div>
-                    <!-- بخش قیمت -->
+                    <!-- بخش قیمت روز طلا -->
                     <div class="flex flex-col text-left px-2 leading-tight">
-                        <span class="text-[8px] text-primary-600 font-medium">قیمت</span>
+                        <span class="text-[8px] text-primary-600/60 font-bold">قیمت</span>
                         <div class="flex items-center gap-0.5">
                             <span class="text-primary-700 font-black text-xs tracking-wide">۴,۲۵۰,۰۰۰</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- ====== نمای دسکتاپ: دو باکس جدا ====== -->
+                <!-- ====== نمای دسکتاپ: دو باکس با تفکیک لوکس زیتونی و بژ ====== -->
                 <div class="hidden md:flex items-center gap-3">
-                    <!-- باکس موجودی -->
-                    <div class="bg-primary-300/30 border border-primary-400/30 rounded-2xl px-4 py-1 flex items-center gap-2 shadow-inner">
+                    <!-- باکس موجودی حساب مشتری -->
+                    <div class="bg-surface-100/50 border border-primary-300/10 rounded-2xl px-4 py-1.5 flex items-center gap-2 shadow-inner">
                         <div class="flex flex-col text-right leading-tight">
-                            <span class="text-[9px] text-primary-700 font-medium">موجودی طلای شما</span>
+                            <span class="text-[9px] text-primary-600/60 font-bold">موجودی طلای شما</span>
                             <div class="flex items-baseline gap-1">
-                                <span class="text-primary-800 font-black text-sm tracking-wide">۲۴.۷۵۰</span>
-                                <span class="text-[9px] text-primary-600">گرم</span>
+                                <span class="text-primary-700 font-black text-sm tracking-wide">۲۴.۷۵۰</span>
+                                <span class="text-[9px] text-primary-600/50">گرم</span>
                             </div>
                         </div>
                     </div>
-                    <!-- باکس قیمت -->
-                    <div class="bg-primary-200/80 border border-primary-300/80 rounded-2xl px-4 py-1 flex items-center gap-2 shadow-inner">
+                    <!-- باکس قیمت لحظه‌ای -->
+                    <div class="bg-surface-100/50 border border-primary-300/10 rounded-2xl px-4 py-1.5 flex items-center gap-2 shadow-inner">
                         <div class="flex flex-col text-left leading-tight">
-                            <span class="text-[9px] text-primary-600 font-medium">قیمت طلا</span>
+                            <span class="text-[9px] text-primary-600/60 font-bold">قیمت طلا (۱۸ عیار)</span>
                             <div class="flex items-center gap-1">
                                 <span class="text-primary-700 font-black text-sm tracking-wide">۴,۲۵۰,۰۰۰</span>
+                                <span class="text-[9px] text-primary-600/50">ریال</span>
                             </div>
                         </div>
                     </div>
@@ -128,40 +136,42 @@
             </div>
         </header>
 
-        <!-- محتوای اصلی (اسکرول‌پذیر) -->
-        <main class="flex-1 p-3 sm:p-4 md:p-8 space-y-4 sm:space-y-6 overflow-y-auto">
+        <!-- محتوای داینامیک و اصلی صفحات فرزند (اسکرول‌پذیر مستقل) -->
+        <main class="flex-1 p-3 sm:p-4 md:p-8 space-y-4 sm:space-y-6 overflow-y-auto bg-surface-50">
             {% block page_main %}{% endblock %}
         </main>
     </div>
 
-    <!-- ===== فوتر موبایل ===== -->
-    <div class="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-primary-200/90 backdrop-blur-lg border-t border-primary-300/80 p-2 shadow-2xl">
+    <!-- ===== فوتر و منوی پایینی موبایل (ثابت و چسبان) ===== -->
+    <div class="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-surface-50/95 backdrop-blur-lg border-t border-primary-300/10 p-2 shadow-2xl">
         <div class="max-w-md mx-auto flex items-center justify-around">
-            <!-- آیکون پیشخوان (طلایی) -->
-            <a href="#" class="flex flex-col items-center justify-center gap-0.5 px-2 py-1 rounded-xl bg-secondary-500/10 text-secondary-600 transition-all text-center">
+            <!-- آیتم پیشخوان -->
+            <a href="#" class="flex flex-col items-center justify-center gap-1 px-2 py-1 rounded-xl text-primary-700/50 hover:text-primary-700 transition-all text-center">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                 </svg>
-                <span class="text-[9px] leading-none text-secondary-600 font-bold">پیشخوان</span>
+                <span class="text-[9px] leading-none font-bold">پیشخوان</span>
             </a>
-            <a href="#" class="flex flex-col items-center justify-center gap-0.5 px-2 py-1 rounded-xl text-primary-700 hover:text-primary-900 transition-all text-center">
+            <!-- آیتم تراکنش‌ها -->
+            <a href="#" class="flex flex-col items-center justify-center gap-1 px-2 py-1 rounded-xl text-primary-700/50 hover:text-primary-700 transition-all text-center">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                <span class="text-[9px] leading-none">تراکنش‌ها</span>
+                <span class="text-[9px] leading-none font-bold">تراکنش‌ها</span>
             </a>
             <!-- آیتم فعال ویترین -->
-            <a href="#" class="flex flex-col items-center justify-center gap-0.5 px-3 py-1.5 rounded-xl bg-gradient-to-br from-primary-400 to-primary-600 text-white font-bold shadow-lg shadow-primary-500/20 transition-all text-center">
+            <a href="#" class="flex flex-col items-center justify-center gap-1 px-3 py-1.5 rounded-xl bg-primary-700 text-secondary-400 font-black shadow-md shadow-primary-700/10 transition-all text-center">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 <span class="text-[9px] leading-none">ویترین</span>
             </a>
-            <a href="#" class="flex flex-col items-center justify-center gap-0.5 px-2 py-1 rounded-xl text-rose-500/80 hover:text-rose-700 transition-all text-center">
+            <!-- آیتم خروج -->
+            <a href="#" class="flex flex-col items-center justify-center gap-1 px-2 py-1 rounded-xl text-rose-600 hover:text-rose-700 transition-all text-center">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                 </svg>
-                <span class="text-[9px] leading-none">خروج</span>
+                <span class="text-[9px] leading-none font-bold">خروج</span>
             </a>
         </div>
     </div>

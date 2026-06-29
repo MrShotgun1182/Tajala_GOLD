@@ -4,97 +4,103 @@
 {% block title %}ورود به تجلا گلد{% endblock %}
 
 {% block content %}
-<div class="min-h-screen flex items-center justify-center bg-primary-800 relative overflow-hidden p-4">
-    <!-- افکت‌های نوری پس‌زمینه -->
-    <div class="absolute top-[-10%] right-[-10%] w-96 h-96 bg-secondary-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-[-10%] left-[-10%] w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
+<div class="min-h-dvh flex items-center justify-center bg-surface-50 text-surface-900 relative overflow-hidden p-4 font-sans antialiased selection:bg-secondary-300/30">
+    
+    <!-- هاله‌های نوری مینیمال و ملایم با تینت‌های زیتونی تیره و بژ مات پس‌زمینه -->
+    <div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-primary-700/5 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-secondary-400/5 rounded-full blur-[140px] pointer-events-none"></div>
 
-    <div class="w-full max-w-md z-10">
-        <!-- هدر کامپوننت ورود -->
+    <div class="w-full max-w-md z-10 animate-fadeIn">
+        <!-- هدر کامپوننت ورود (برندینگ مینیمال) -->
         <div class="text-center mb-8">
-            <h1 class="text-5xl font-bold text-secondary-500 mb-2 tracking-tight">تجلا گلد</h1>
-            <p class="text-surface-400 text-lg">درخشش اصالت، امنیت دارایی</p>
+            <h1 class="text-4xl font-black text-primary-700 mb-2 tracking-tight">تجلا گلد</h1>
+            <p class="text-primary-600/60 text-sm font-medium">درخشش اصالت، امنیت دارایی</p>
         </div>
 
-        <div class="bg-primary-900/40 backdrop-blur-xl border border-surface-800 p-8 rounded-3xl shadow-2xl">
-            <h2 class="text-2xl font-semibold text-white mb-6 text-right">خوش آمدید</h2>
+        <!-- کارت اصلی فرم ورود با پس‌زمینه استخوانی/بژ شفاف و بلور تئاتریکال -->
+        <div class="bg-surface-50/80 backdrop-blur-xl border border-primary-300/20 p-6 sm:p-8 rounded-3xl shadow-sm">
+            <h2 class="text-xl font-black text-primary-700 mb-6 text-right">خوش آمدید</h2>
             
-            <!-- 👇 نمایش پیام‌های سیستم (خطای کلی عدم تطابق رمز یا یوزر) -->
+            <!-- 👇 نمایش پیام‌های سیستم (خطای کلی عدم تطابق یا پیام‌های موفقیت) -->
             {% if messages %}
                 <div class="mb-6 space-y-2">
                     {% for message in messages %}
-                        <div class="p-4 rounded-xl text-sm text-right font-medium {% if message.tags == 'error' %}bg-danger/20 text-danger border border-danger/30{% else %}bg-success/20 text-success border border-success/30{% endif %}">
+                        <div class="p-4 rounded-xl text-xs text-right font-bold transition-all {% if message.tags == 'error' %}bg-rose-50 text-rose-700 border border-rose-200/50{% else %}bg-emerald-50 text-emerald-700 border border-emerald-200/50{% endif %}">
                             {{ message }}
                         </div>
                     {% endfor %}
                 </div>
             {% endif %}
 
-            <form method="post" class="space-y-6">
+            <form method="post" class="space-y-5">
                 {% csrf_token %}
                 
                 <!-- فیلد شماره تماس / نام کاربری -->
-                <div>
-                    <label class="block text-surface-300 mb-2 text-right text-sm">شماره همراه یا نام کاربری</label>
-                    <input type="text" 
-                           name="phone_number" 
-                           value="{{ form.phone_number.value|default_if_none:'' }}"
-                           required
-                           class="w-full bg-primary-950/50 border {% if form.phone_number.errors %}border-danger{% else %}border-surface-700{% endif %} text-white px-4 py-3 rounded-xl focus:outline-none focus:border-secondary-500 transition-all text-right placeholder-surface-600"
-                           placeholder="0912*******">
+                <div class="space-y-1.5">
+                    <label class="block text-primary-700/80 text-right font-bold text-xs">شماره همراه یا نام کاربری</label>
+                    <div class="relative">
+                        <input type="text" 
+                               name="phone_number" 
+                               value="{{ form.phone_number.value|default_if_none:'' }}"
+                               required
+                               class="w-full bg-surface-100/50 border {% if form.phone_number.errors %}border-rose-400 focus:border-rose-500{% else %}border-primary-300/20 focus:border-primary-700{% endif %} text-primary-800 px-4 py-3 rounded-xl focus:outline-none transition-all text-right placeholder-primary-600/30 text-sm font-medium"
+                               placeholder="0912*******">
+                    </div>
                     
                     <!-- نمایش خطاهای اختصاصی فیلد تلفن -->
                     {% if form.phone_number.errors %}
                         {% for error in form.phone_number.errors %}
-                            <p class="text-danger text-xs text-right mt-1 font-medium">{{ error }}</p>
+                            <p class="text-rose-600 text-[11px] text-right mt-1 font-bold">{{ error }}</p>
                         {% endfor %}
                     {% endif %}
                 </div>
 
                 <!-- فیلد رمز عبور -->
-                <div>
-                    <label class="block text-surface-300 mb-2 text-right text-sm">رمز عبور</label>
-                    <input type="password" 
-                           name="password" 
-                           required
-                           class="w-full bg-primary-950/50 border {% if form.password.errors %}border-danger{% else %}border-surface-700{% endif %} text-white px-4 py-3 rounded-xl focus:outline-none focus:border-secondary-500 transition-all text-right placeholder-surface-600"
-                           placeholder="********">
+                <div class="space-y-1.5">
+                    <label class="block text-primary-700/80 text-right font-bold text-xs">رمز عبور</label>
+                    <div class="relative">
+                        <input type="password" 
+                               name="password" 
+                               required
+                               class="w-full bg-surface-100/50 border {% if form.password.errors %}border-rose-400 focus:border-rose-500{% else %}border-primary-300/20 focus:border-primary-700{% endif %} text-primary-800 px-4 py-3 rounded-xl focus:outline-none transition-all text-right placeholder-primary-600/30 text-sm font-medium"
+                               placeholder="********">
+                    </div>
                     
                     <!-- نمایش خطاهای اختصاصی فیلد رمز عبور -->
                     {% if form.password.errors %}
                         {% for error in form.password.errors %}
-                            <p class="text-danger text-xs text-right mt-1 font-medium">{{ error }}</p>
+                            <p class="text-rose-600 text-[11px] text-right mt-1 font-bold">{{ error }}</p>
                         {% endfor %}
                     {% endif %}
                 </div>
 
-                <!-- بخش فراموشی و مرا به خاطر بسپار -->
-                <div class="flex items-center justify-between text-sm">
-                    <a href="#" class="text-secondary-400 hover:text-secondary-300 transition-colors">فراموشی رمز عبور؟</a>
+                <!-- بخش فراموشی و مرا به خاطر بسپار با طراحی مینی‌مال کامپوننت چک‌باکس -->
+                <div class="flex items-center justify-between text-xs pt-1">
+                    <a href="#" class="text-primary-700/60 hover:text-primary-800 font-bold transition-colors">فراموشی رمز عبور؟</a>
                     <div class="flex items-center gap-2">
-                        <label for="remember" class="text-surface-400">مرا به خاطر بسپار</label>
-                        <input type="checkbox" id="remember" class="accent-secondary-500">
+                        <label for="remember" class="text-primary-700/60 font-bold cursor-pointer select-none">مرا به خاطر بسپار</label>
+                        <input type="checkbox" id="remember" class="w-4 h-4 rounded border-primary-300 text-primary-700 focus:ring-primary-700/20 accent-primary-700 cursor-pointer">
                     </div>
                 </div>
 
-                <!-- دکمه سابمیت فرم -->
+                <!-- دکمه سابمیت فرم (زیتونی تیره با هاور عمیق و افکت کلیک ارگانیک) -->
                 <button type="submit" 
-                    class="w-full bg-secondary-500 hover:bg-secondary-600 text-primary-950 font-bold py-4 rounded-xl transition-all shadow-lg shadow-secondary-500/20 active:scale-95">
+                    class="w-full bg-primary-700 hover:bg-primary-800 text-secondary-400 font-black py-3.5 rounded-xl transition-all shadow-md shadow-primary-700/10 active:scale-[0.98] text-sm mt-2">
                     ورود به حساب کاربری
                 </button>
             </form>
 
-            <!-- بخش ثبت‌نام -->
-            <div class="mt-8 pt-6 border-t border-surface-800 text-center">
-                <p class="text-surface-400">
+            <!-- بخش ثبت‌نام و ارجاع -->
+            <div class="mt-6 pt-5 border-t border-primary-300/10 text-center">
+                <p class="text-primary-700/50 text-xs font-medium">
                     هنوز عضو نشده‌اید؟ 
-                    <a href="{% url 'accounts:register'%}" class="text-secondary-400 font-bold hover:underline">ثبت نام کنید</a>
+                    <a href="{% url 'accounts:register'%}" class="text-primary-700 font-black hover:text-primary-800 mr-1 transition-colors">ثبت نام کنید</a>
                 </p>
             </div>
         </div>
 
-        <!-- فوتر -->
-        <p class="text-center text-surface-600 text-xs mt-8">
+        <!-- فوتر پایینی کامپوننت -->
+        <p class="text-center text-primary-600/40 text-[11px] font-medium mt-8 tracking-wide">
             &copy; 2026 Tajala Gold. تمامی حقوق محفوظ است.
         </p>
     </div>
