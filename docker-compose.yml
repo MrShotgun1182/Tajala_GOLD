@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # ۱. بخش پایگاه داده (PostgreSQL)
+  db:
+    image: postgres:15-alpine
+    container_name: tajala_postgres
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=tajala_gold_db
+      - POSTGRES_USER=tajala_admin
+      - POSTGRES_PASSWORD=secure_gold_pass
+    ports:
+      - "5433:5432"
+
+  # ۲. بخش سیستم مدیریت تسک‌ها و کش (Redis)
+  redis:
+    image: redis:7-alpine
+    container_name: tajala_redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  # ۳. بخش اپلیکیشن جنگو و تیلویند فرانت‌اَند
+  web:
+    build: .
+    container_name: tajala_django_web
+    # دستور ترکیبی: ابتدا پکیج‌های فرانت‌اَند بیلد شوند، سپس جنگو مایگریت کند و روشن شود
+    command: >
+      sh -c "cd /app/frontend && npm install && npm run build &&
+             cd /app && python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=tajala_gold_db
+      - DB_USER=tajala_admin
+      - DB_PASSWORD=secure_gold_pass
+      - REDIS_URL=redis://redis:6379/1
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  postgres_data:

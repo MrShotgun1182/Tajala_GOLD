@@ -74,3 +74,6 @@ $RECYCLE.BIN/
 *.njsproj
 *.sln
 *.swp
+
+.db_data/
+postgres_data/
