@@ -1,18 +1,24 @@
 import requests
-from apps.gold.models import GoldPrice
+from django.db import transaction
+from gold import models  # اصلاح ایمپورت برای جلوگیری از تداخل مدل‌های جنگو و سلری
 
-def fetch_and_store_gold_price() -> bool:
+def FetchAndStoreGoldPriceService() -> bool:
     """
     این تابع به API متصل شده، لیست قیمت‌ها را گرفته، قیمت طلای ۱۸ عیار 
     را پیدا کرده و آن را در دیتابیس ثبت می‌کند.
     """
+    print("[SERVICE] Executing function to fetch real gold price...")
     url = "https://Api.BrsApi.ir/Market/Gold_Currency.php?key=BIie41Y8ZjUpANHUDWWtKcMj9U6NAzP1" 
+    
+    # اضافه کردن هدر مرورگر واقعی برای عبور از فایروال ضد رباتِ سایت
     headers = {
-        "Accept": "application/json"
+        "Accept": "application/json",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     }
 
     try:
-        response = requests.get(url, headers=headers, timeout=5)
+        # فرستادن درخواست همراه با هدر و دور زدن اختلالات SSL داکر با verify=False
+        response = requests.get(url, headers=headers, timeout=10, verify=False)
         
         if response.status_code == 200:
             data = response.json()
@@ -28,7 +34,9 @@ def fetch_and_store_gold_price() -> bool:
                 current_price = gold_18k_data.get("price")
                 
                 if current_price is not None:
-                    GoldPrice.objects.create(price=current_price)
+                    # استفاده از transaction.atomic برای ثبت آنی و قطعی در دیتابیس پستگرس داکر
+                    with transaction.atomic():
+                        models.GoldPrice.objects.create(price=current_price)
                     print(f"[SUCCESS] 18K Gold price updated in DB: {current_price}")
                     return True
             else:

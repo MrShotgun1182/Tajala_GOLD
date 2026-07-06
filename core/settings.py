@@ -153,3 +153,7 @@ CACHES = {
         }
     }
 }
+
+CELERY_BROKER_URL = 'redis://tajala_redis:6379/1'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'

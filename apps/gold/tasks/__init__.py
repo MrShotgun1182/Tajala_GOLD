@@ -1,0 +1,1 @@
+from .get_gold_price_task import GetGoldPriceTask

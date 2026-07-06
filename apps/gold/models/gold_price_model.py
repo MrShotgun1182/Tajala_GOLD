@@ -5,6 +5,7 @@ class GoldPrice(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="زمان ثبت در سیستم")
 
     class Meta:
+        app_label = 'gold'
         verbose_name = "قیمت طلا"
         verbose_name_plural = "تاریخچه قیمت طلا"
         ordering = ['-created_at'] 
