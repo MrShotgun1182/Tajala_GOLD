@@ -1,0 +1,43 @@
+import requests
+from apps.gold.models import GoldPrice
+
+def fetch_and_store_gold_price() -> bool:
+    """
+    این تابع به API متصل شده، لیست قیمت‌ها را گرفته، قیمت طلای ۱۸ عیار 
+    را پیدا کرده و آن را در دیتابیس ثبت می‌کند.
+    """
+    url = "https://Api.BrsApi.ir/Market/Gold_Currency.php?key=BIie41Y8ZjUpANHUDWWtKcMj9U6NAzP1" 
+    headers = {
+        "Accept": "application/json"
+    }
+
+    try:
+        response = requests.get(url, headers=headers, timeout=5)
+        
+        if response.status_code == 200:
+            data = response.json()
+            gold_list = data.get("gold", [])
+            
+            gold_18k_data = None
+            for item in gold_list:
+                if item.get("symbol") == "IR_GOLD_18K":
+                    gold_18k_data = item
+                    break
+            
+            if gold_18k_data:
+                current_price = gold_18k_data.get("price")
+                
+                if current_price is not None:
+                    GoldPrice.objects.create(price=current_price)
+                    print(f"[SUCCESS] 18K Gold price updated in DB: {current_price}")
+                    return True
+            else:
+                print("[ERROR] Symbol 'IR_GOLD_18K' not found in API response.")
+                
+        else:
+            print(f"[ERROR] API returned status code: {response.status_code}")
+            
+    except requests.RequestException as e:
+        print(f"[NETWORK ERROR] Failed to connect to Gold API: {e}")
+        
+    return False

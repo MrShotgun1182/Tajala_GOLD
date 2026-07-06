@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'admin_panel',
     'customers',
     'categorys',
-    'products'
+    'products',
+    'gold'
 ]
 
 MIDDLEWARE = [
