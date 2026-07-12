@@ -1,5 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block title %}{% block page_title %}تجلا گلد | پنل کاربری{% endblock %}{% endblock %}
 
@@ -141,7 +142,7 @@
                         <div class="flex flex-col text-left leading-tight">
                             <span class="text-[9px] text-primary-600/60 font-bold">قیمت طلا (۱۸ عیار)</span>
                             <div class="flex items-center gap-1">
-                                <span class="text-primary-700 font-black text-sm tracking-wide">{{ gold_price }}</span>
+                                <span class="text-primary-700 font-black text-sm tracking-wide">{{ gold_price|intcomma }}</span>
                                 <span class="text-[9px] text-primary-600/50">ریال</span>
                             </div>
                         </div>
