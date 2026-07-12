@@ -29,9 +29,9 @@ services:
     container_name: tajala_django_web
     # دستور ترکیبی: ابتدا پکیج‌های فرانت‌اَند بیلد شوند، سپس جنگو مایگریت کند و روشن شود
     command: >
-      sh -c "cd /app/frontend && npm install && npm run build &&
-             cd /app && python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8000"
+          sh -c "cd /app/frontend && npm install && npm run build & 
+                cd /app && python manage.py migrate &&
+                python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
     ports:

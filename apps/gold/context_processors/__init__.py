@@ -1,0 +1,1 @@
+from .latest_gold_price_processor import LatestGoldPrice
