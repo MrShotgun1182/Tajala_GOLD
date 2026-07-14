@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     
-    # Project Apps (حالا بدون پیشوند به راحتی شناخته می‌شود)
+    
+    'common',
     'accounts',
     'transactions',
     'admin_panel',
