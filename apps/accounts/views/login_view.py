@@ -8,7 +8,7 @@ def LoginView(request):
     if request.user.is_authenticated:
         if request.user.role == 'admin':
             return redirect('admin_panel:admin_dashboard')
-        return redirect('customers:customer_panel')
+        return redirect('customers:customer_dashboard')
 
     form = LoginForm(request.POST or None)
 
