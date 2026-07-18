@@ -4,10 +4,8 @@
 {% load numbers_filter %}
 {% load customer_gold_balance_tag %}
 
-
-{% CustomerGoldBalanceTag request.user as balance %}
-
 {% block content %}
+{% CustomerGoldBalanceTag request.user as user_gold %}
 <div class="min-h-dvh bg-surface-50 text-surface-900 relative overflow-hidden flex flex-col md:flex-row pb-24 md:pb-0 overflow-x-hidden font-sans antialiased selection:bg-secondary-300/30">
     <!-- هاله‌های نوری پس‌زمینه -->
     <div class="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-primary-700/5 rounded-full blur-[160px] pointer-events-none"></div>
@@ -136,7 +134,7 @@
                         <div class="flex flex-col text-right leading-tight">
                             <span class="text-[9px] text-primary-600/60 font-bold">موجودی طلای شما</span>
                             <div class="flex items-baseline gap-1">
-                                <span class="text-primary-700 font-black text-sm tracking-wide">{{ balance }}</span>
+                                <span class="text-primary-700 font-black text-sm tracking-wide">{{ user_gold.gold_balance|to_persian }}</span>
                                 <span class="text-[9px] text-primary-600/50">گرم</span>
                             </div>
                         </div>

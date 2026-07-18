@@ -1,1 +1,2 @@
 from .fetch_and_store_gold_price_service import FetchAndStoreGoldPriceService
+from .get_latest_Gold_price_service import GetLatestGoldPriceService
