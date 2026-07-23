@@ -18,19 +18,24 @@ def AdminCreateProductView(request):
             # دریافت فایل‌های مربوط به گالری تصاویر فرعی از ریکوئست
             gallery_images = request.FILES.getlist('gallery_images')
             
-            # فراخوانی سرویس اختصاصی شما
+            # فراخوانی سرویس اختصاصی با فیلدهای جدید محاسباتی
             product = CreateProductService(
                 category_id=cleaned_data['category'].id if cleaned_data['category'] else None,
                 title=cleaned_data['title'],
                 slug=cleaned_data['slug'],
                 weight=cleaned_data['weight'],
+                profit_percent=cleaned_data['profit_percent'],
+                wage_percent=cleaned_data['wage_percent'],
+                other_costs=cleaned_data['other_costs'],
+                tax_percent=cleaned_data['tax_percent'],
                 image=cleaned_data['image'],
                 description=cleaned_data['description'],
+                is_active=cleaned_data['is_active'],
                 gallery_images=gallery_images
             )
             
             messages.success(request, f"محصول «{product.title}» با موفقیت به کاتالوگ اضافه شد.")
-            return redirect('admin_panel:create_product') # یا هر مسیری که برای لیست محصولات داری
+            return redirect('admin_panel:create_product')
     else:
         form = forms.ProductForm()
 

@@ -1,5 +1,7 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% load numbers_filter %}
+{% load humanize %}
 
 {% block title %}پنل مدیریت | تجلا گلد{% endblock %}
 
@@ -97,9 +99,9 @@
             <div class="flex items-center gap-1 sm:gap-3">
                 <div class="bg-surface-100 border border-primary-300/20 rounded-xl px-3 py-1.5 flex items-center gap-2 shadow-inner">
                     <div class="flex flex-col text-left leading-tight">
-                        <span class="text-[9px] text-primary-600/60 font-bold">مبنای نرخ طلا (۱۸ عیار)</span>
+                        <span class="text-[9px] text-primary-600/60 font-bold">نرخ طلا</span>
                         <div class="flex items-center gap-1 mt-0.5">
-                            <span class="text-primary-700 font-black text-xs sm:text-sm tracking-wide">۴,۲۵۰,۰۰۰</span>
+                            <span class="text-primary-700 font-black text-xs sm:text-sm tracking-wide">{{ gold_price|three_digits|to_persian }}</span>
                             <span class="text-[9px] text-primary-600/60">ریال</span>
                         </div>
                     </div>

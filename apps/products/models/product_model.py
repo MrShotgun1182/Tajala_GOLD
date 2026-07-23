@@ -20,6 +20,36 @@ class ProductModel(models.Model):
     description = models.TextField(blank=True, null=True, verbose_name="توضیحات محصول")
     image = models.ImageField(upload_to='products/', verbose_name="تصویر اصلی محصول")
     
+    # ========== فیلدهای جدید برای محاسبه قیمت ==========
+    profit_percent = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2, 
+        default=0.00, 
+        verbose_name="سود (%)"
+    )
+    
+    wage_percent = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2, 
+        default=0.00, 
+        verbose_name="اجرت (%)"
+    )
+    
+    other_costs = models.DecimalField(
+        max_digits=15, 
+        decimal_places=0, 
+        default=0, 
+        verbose_name="هزینه‌های جانبی (ریال)"
+    )
+    
+    tax_percent = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2, 
+        default=0.00, 
+        verbose_name="مالیات (%)"
+    )
+    # ==================================================
+    
     is_active = models.BooleanField(default=True, verbose_name="نمایش در ویترین")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ثبت")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="آخرین بروزرسانی")

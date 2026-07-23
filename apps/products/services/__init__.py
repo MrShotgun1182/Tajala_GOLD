@@ -4,3 +4,4 @@ from .get_product_by_slug_service import GetProductBySlugService
 from .update_product_service import UpdateProductService
 from .delete_product_service import DeleteProductService
 from .get_product_detail_service import GetProductDetailService
+from .calculate_price_service import CalculatePriceService
