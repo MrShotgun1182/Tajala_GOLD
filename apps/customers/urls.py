@@ -8,5 +8,6 @@ urlpatterns = [
     path('showcase/', views.CustomerShowcaseView, name='showcase'),
     path('product/<slug:slug>/', views.ProductDetailView, name='product_detail'),
     path('product/<slug:slug>/toggle-goal/', views.ToggleGoalView, name='toggle_goal'),
-    path('transactions_history/', views.CustomerTransactionsHistoryView, name='transactions_history')
+    path('transactions_history/', views.CustomerTransactionsHistoryView, name='transactions_history'),
+    path('gold_calculate/', views.CustomerGoldCalculateView, name='gold_calculate')
 ]

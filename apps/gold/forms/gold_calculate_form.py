@@ -4,8 +4,8 @@ from decimal import Decimal
 class GoldCalculateForm(forms.Form):
     gold_price_per_gram = forms.DecimalField(
         max_digits=15,
-        decimal_places=0,
-        min_value=Decimal('1'),
+        decimal_places=2,
+        min_value=Decimal('1.00'),
         label="قیمت هر گرم طلا (ریال)",
         widget=forms.NumberInput(attrs={
             'step': '100'
