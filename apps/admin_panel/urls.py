@@ -10,4 +10,5 @@ urlpatterns = [
     path('create_gold_transaction/', views.GoldTransactionView, name='create_gold_transaction'),
     path('api/search/', views.AdminCustomerSearchApi, name='search_api'),
     path('create_product/', views.AdminCreateProductView, name='create_product'),
+    path('gold_calculate/', views.AdminGoldCalculateView, name='gold_calculate')
 ]

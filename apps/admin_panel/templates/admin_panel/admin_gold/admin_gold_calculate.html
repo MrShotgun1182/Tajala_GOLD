@@ -1,0 +1,143 @@
+{% extends 'core/base_admin.html' %}
+{% load static %}
+{% load numbers_filter %}
+
+{% block title %}داشبورد جامع مدیریت | تجلا گلد{% endblock %}
+
+{% block admin_page_title %}اتاق فرمان و پایش هوشمند پلتفرم مدیریت{% endblock %}
+
+{% block admin_content %}
+
+<div class="max-w-7xl mx-auto px-0 md:px-2">
+    <!-- هدر -->
+    <div class="mb-6 bg-white border border-primary-300/10 rounded-2xl p-4 md:p-6 shadow-sm">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-primary-700 flex items-center justify-center shadow-md shadow-primary-700/10 shrink-0">
+                <svg class="w-5 h-5 text-secondary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+            </div>
+            <div>
+                <h1 class="text-lg font-black text-primary-700">ماشین‌حساب قیمت طلا</h1>
+                <p class="text-xs text-primary-600/60 font-medium mt-0.5">محاسبه قیمت نهایی طلا بر اساس فرمول اتحادیه</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- فرم ورودی‌ها -->
+        <div class="bg-white border border-primary-300/10 rounded-2xl p-4 md:p-6 shadow-sm">
+            <form method="post" class="space-y-4">
+                {% csrf_token %}
+                
+                <!-- قیمت هر گرم طلا -->
+                <div>
+                    <label class="block text-xs font-bold text-primary-700 mb-1.5" for="{{ form.gold_price_per_gram.id_for_label }}">
+                        {{ form.gold_price_per_gram.label }}
+                    </label>
+                    <input type="number" name="{{ form.gold_price_per_gram.name }}" id="{{ form.gold_price_per_gram.id_for_label }}" step="1000" value="{{ gold_price|default:'' }}" placeholder="مثال: ۴۵۰۰۰۰۰" class="w-full px-4 py-2.5 bg-surface-50 border border-primary-300/20 rounded-xl text-sm text-primary-700 placeholder:text-primary-300/60 focus:outline-none focus:ring-2 focus:ring-primary-700/20 focus:border-primary-700/40 transition-all font-medium">
+                    {% if form.gold_price_per_gram.errors %}<span class="text-xs text-red-500 mt-1 block font-bold">{{ form.gold_price_per_gram.errors.0 }}</span>{% endif %}
+                </div>
+
+                <!-- وزن طلا -->
+                <div>
+                    <label class="block text-xs font-bold text-primary-700 mb-1.5" for="{{ form.weight.id_for_label }}">
+                        {{ form.weight.label }}
+                    </label>
+                    <input type="number" name="{{ form.weight.name }}" id="{{ form.weight.id_for_label }}" step="0.001" value="{{ form.weight.value|default:'' }}" placeholder="مثال: ۲.۵" class="w-full px-4 py-2.5 bg-surface-50 border border-primary-300/20 rounded-xl text-sm text-primary-700 placeholder:text-primary-300/60 focus:outline-none focus:ring-2 focus:ring-primary-700/20 focus:border-primary-700/40 transition-all font-medium">
+                    {% if form.weight.errors %}<span class="text-xs text-red-500 mt-1 block font-bold">{{ form.weight.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-primary-700 mb-1.5" for="{{ form.wage_percent.id_for_label }}">
+                            {{ form.wage_percent.label }}
+                        </label>
+                        <input type="number" name="{{ form.wage_percent.name }}" id="{{ form.wage_percent.id_for_label }}" step="0.1" value="{{ form.wage_percent.value|default:'7.00' }}" placeholder="مثال: ۷.۰" class="w-full px-4 py-2.5 bg-surface-50 border border-primary-300/20 rounded-xl text-sm text-primary-700 placeholder:text-primary-300/60 focus:outline-none focus:ring-2 focus:ring-primary-700/20 focus:border-primary-700/40 transition-all font-medium">
+                        {% if form.wage_percent.errors %}<span class="text-xs text-red-500 mt-1 block font-bold">{{ form.wage_percent.errors.0 }}</span>{% endif %}
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-primary-700 mb-1.5" for="{{ form.profit_percent.id_for_label }}">
+                            {{ form.profit_percent.label }}
+                        </label>
+                        <input type="number" name="{{ form.profit_percent.name }}" id="{{ form.profit_percent.id_for_label }}" step="0.1" value="{{ form.profit_percent.value|default:'7.00' }}" placeholder="مثال: ۷.۰" class="w-full px-4 py-2.5 bg-surface-50 border border-primary-300/20 rounded-xl text-sm text-primary-700 placeholder:text-primary-300/60 focus:outline-none focus:ring-2 focus:ring-primary-700/20 focus:border-primary-700/40 transition-all font-medium">
+                        {% if form.profit_percent.errors %}<span class="text-xs text-red-500 mt-1 block font-bold">{{ form.profit_percent.errors.0 }}</span>{% endif %}
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-primary-700 mb-1.5" for="{{ form.tax_percent.id_for_label }}">
+                            {{ form.tax_percent.label }}
+                        </label>
+                        <input type="number" name="{{ form.tax_percent.name }}" id="{{ form.tax_percent.id_for_label }}" step="1" value="{{ form.tax_percent.value|default:'10.00' }}" placeholder="مثال: ۱۰.۰" class="w-full px-4 py-2.5 bg-surface-50 border border-primary-300/20 rounded-xl text-sm text-primary-700 placeholder:text-primary-300/60 focus:outline-none focus:ring-2 focus:ring-primary-700/20 focus:border-primary-700/40 transition-all font-medium">
+                        {% if form.tax_percent.errors %}<span class="text-xs text-red-500 mt-1 block font-bold">{{ form.tax_percent.errors.0 }}</span>{% endif %}
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-primary-700 mb-1.5" for="{{ form.other_costs.id_for_label }}">
+                            {{ form.other_costs.label }}
+                        </label>
+                        <input type="number" name="{{ form.other_costs.name }}" id="{{ form.other_costs.id_for_label }}" step="1000" value="{{ form.other_costs.value|default:'0' }}" placeholder="مثال: ۵۰۰۰۰۰" class="w-full px-4 py-2.5 bg-surface-50 border border-primary-300/20 rounded-xl text-sm text-primary-700 placeholder:text-primary-300/60 focus:outline-none focus:ring-2 focus:ring-primary-700/20 focus:border-primary-700/40 transition-all font-medium">
+                        {% if form.other_costs.errors %}<span class="text-xs text-red-500 mt-1 block font-bold">{{ form.other_costs.errors.0 }}</span>{% endif %}
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full mt-2 bg-primary-700 hover:bg-primary-800 text-secondary-400 font-black text-sm py-3 rounded-xl shadow-md shadow-primary-700/15 transition-all duration-200">
+                    محاسبه قیمت نهایی
+                </button>
+            </form>
+        </div>
+
+        <!-- فاکتور نهایی -->
+        <div class="bg-white border border-primary-300/10 rounded-2xl p-4 md:p-6 shadow-sm flex flex-col">
+            <div class="flex-1">
+                <h2 class="text-xs font-black text-primary-700 pb-3 mb-4 border-b border-primary-300/10 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    ریز محاسبات فاکتور
+                </h2>
+                
+                {% if result %}
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between py-2 border-b border-primary-300/5">
+                            <span class="text-primary-600/70 font-medium">قیمت طلا خام:</span>
+                            <span class="font-bold text-primary-700">{{ result.raw_gold_price|floatformat:0|to_persian }} ریال</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-primary-300/5">
+                            <span class="text-primary-600/70 font-medium">اجرت ساخت:</span>
+                            <span class="font-bold text-primary-700">{{ result.wage_amount|floatformat:0|to_persian }} ریال</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-primary-300/5">
+                            <span class="text-primary-600/70 font-medium">سود فروشنده:</span>
+                            <span class="font-bold text-primary-700">{{ result.profit_amount|floatformat:0|to_persian }} ریال</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-primary-300/5">
+                            <span class="text-primary-600/70 font-medium">مالیات بر ارزش افزوده:</span>
+                            <span class="font-bold text-primary-700">{{ result.tax_amount|floatformat:0|to_persian }} ریال</span>
+                        </div>
+                        <div class="flex justify-between py-2">
+                            <span class="text-primary-600/70 font-medium">هزینه‌های جانبی:</span>
+                            <span class="font-bold text-primary-700">{{ result.other_costs|floatformat:0|to_persian }} ریال</span>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="h-48 flex items-center justify-center text-primary-300/60 font-medium text-sm">
+                        اطلاعات را وارد کرده و روی گزینه محاسبه کلیک کنید.
+                    </div>
+                {% endif %}
+            </div>
+
+            {% if result %}
+                <div class="mt-4 pt-4 border-t-2 border-dashed border-primary-300/20">
+                    <div class="bg-primary-700 text-secondary-400 p-4 rounded-xl flex justify-between items-center shadow-md shadow-primary-700/10">
+                        <span class="font-black text-sm">مبلغ قابل پرداخت:</span>
+                        <span class="text-xl font-black tracking-tight">{{ result.total_price|floatformat:0|to_persian }} <span class="text-xs font-bold text-secondary-400/80 mr-1">ریال</span></span>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

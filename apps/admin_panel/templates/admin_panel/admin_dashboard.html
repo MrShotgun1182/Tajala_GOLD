@@ -1,5 +1,6 @@
 {% extends 'core/base_admin.html' %}
 {% load static %}
+{% load numbers_filter %}
 
 {% block title %}داشبورد جامع مدیریت | تجلا گلد{% endblock %}
 
@@ -9,7 +10,7 @@
 
 <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
 <div class="flex items-center gap-2 rtl:space-x-reverse">
-    <a href="#" class="flex items-center gap-1.5 px-3 py-2 bg-surface-100 border border-primary-300/20 text-primary-700 rounded-xl hover:bg-surface-200/70 transition-all duration-200 group text-xs font-bold shadow-sm whitespace-nowrap no-underline">
+    <a href="{% url 'admin_panel:gold_calculate' %}" class="flex items-center gap-1.5 px-3 py-2 bg-surface-100 border border-primary-300/20 text-primary-700 rounded-xl hover:bg-surface-200/70 transition-all duration-200 group text-xs font-bold shadow-sm whitespace-nowrap no-underline">
         <svg class="w-4 h-4 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
         </svg>
